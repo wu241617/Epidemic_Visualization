@@ -1,0 +1,364 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210301.232714.16044.0.001.json",
+    "dumpEventTime": "2021-03-01T23:27:14Z",
+    "dumpEventTimeStamp": "1614612434757",
+    "processId": 16044,
+    "cwd": "E:\\新桌面\\Epidemic-visualization\\server\\api",
+    "commandLine": [
+      "node",
+      "index.js"
+    ],
+    "nodejsVersion": "v12.16.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.0",
+      "v8": "7.8.279.23-node.31",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.0/node-v12.16.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.0/node-v12.16.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.19041",
+    "osVersion": "Windows 10 Home China",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz",
+        "speed": 2496,
+        "user": 1900437,
+        "nice": 0,
+        "sys": 1726312,
+        "idle": 80846890,
+        "irq": 260218
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz",
+        "speed": 2496,
+        "user": 2188781,
+        "nice": 0,
+        "sys": 1978593,
+        "idle": 80305890,
+        "irq": 23265
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz",
+        "speed": 2496,
+        "user": 2189203,
+        "nice": 0,
+        "sys": 1779359,
+        "idle": 80504703,
+        "irq": 19734
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz",
+        "speed": 2496,
+        "user": 2295296,
+        "nice": 0,
+        "sys": 1445609,
+        "idle": 80732359,
+        "irq": 17531
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "WLAN",
+        "internal": false,
+        "mac": "64:6e:69:cb:9d:29",
+        "address": "fe80::34aa:ef7b:650c:8fc8",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 4
+      },
+      {
+        "name": "WLAN",
+        "internal": false,
+        "mac": "64:6e:69:cb:9d:29",
+        "address": "192.168.18.203",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "LAPTOP-M4FEVNHJ"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff699ea19f9",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+    },
+    {
+      "pc": "0x00007ff699ea5e1c",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28316"
+    },
+    {
+      "pc": "0x00007ff699ea4dd8",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24152"
+    },
+    {
+      "pc": "0x00007ff699fa364b",
+      "symbol": "v8::base::CPU::has_sse+38363"
+    },
+    {
+      "pc": "0x00007ff69a7ba11e",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff69a7a21f1",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff69a66e74c",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff69a68b802",
+      "symbol": "v8::internal::Factory::NewFixedDoubleArray+98"
+    },
+    {
+      "pc": "0x00007ff69a567e9f",
+      "symbol": "v8::debug::Script::GetIsolate+6303"
+    },
+    {
+      "pc": "0x00007ff69a41841a",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+162938"
+    },
+    {
+      "pc": "0x00007ff69ac04fad",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+546637"
+    },
+    {
+      "pc": "0x0000014a5d2df62b",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 1545199616,
+    "totalCommittedMemory": 1545199616,
+    "usedMemory": 1509984152,
+    "availableMemory": 603314688,
+    "memoryLimit": 2131755008,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16759296,
+        "used": 0,
+        "available": 16759296
+      },
+      "old_space": {
+        "memorySize": 5390336,
+        "committedMemory": 5390336,
+        "capacity": 4615184,
+        "used": 4615184,
+        "available": 0
+      },
+      "code_space": {
+        "memorySize": 430080,
+        "committedMemory": 430080,
+        "capacity": 261920,
+        "used": 261920,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 790528,
+        "committedMemory": 790528,
+        "capacity": 362400,
+        "used": 362400,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 602210304,
+        "committedMemory": 602210304,
+        "capacity": 602198176,
+        "used": 602198176,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 902512640,
+        "committedMemory": 902512640,
+        "capacity": 902510880,
+        "used": 902510880,
+        "available": 0
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 1.703,
+    "kernelCpuSeconds": 6.015,
+    "cpuConsumptionPercent": 36.7524,
+    "maxRss": 939446272,
+    "pageFaults": {
+      "IORequired": 1046528,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 210,
+      "writes": 5
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=::": "::\\",
+    "=E:": "E:\\新桌面\\Epidemic-visualization\\server\\api",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Lenovo\\AppData\\Roaming",
+    "CATALINA_BASE": "D:\\apache-tomcat-8.5.51",
+    "CATALINA_HOME": "D:\\apache-tomcat-8.5.51",
+    "classpath": ".;E:\\JAVA软件\\jdk1.8\\lib;E:\\JAVA软件\\jdk1.8\\lib\\tools.jar;D:\\apache-tomcat-8.5.51\\lib\\servlet-api.jar;",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "LAPTOP-M4FEVNHJ",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "configsetroot": "C:\\WINDOWS\\ConfigSetRoot",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Lenovo",
+    "JAVA_HOME": "E:\\JAVA软件\\jdk1.8",
+    "LOCALAPPDATA": "C:\\Users\\Lenovo\\AppData\\Local",
+    "LOGONSERVER": "\\\\LAPTOP-M4FEVNHJ",
+    "MAVEN_HOME": "G:\\Maven\\apache-maven-3.2.5",
+    "MAVEN_OPTS": "-Xms128m -Xmx512m -Duser.language=zh -Dfile.encoding=UTF-8",
+    "MGLS_LICENSE_FILE": "F:\\Modelsim\\LICENSE.TXT",
+    "mysql": "G:\\Mysql",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\Lenovo\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "E:\\JAVA软件\\jdk1.8\\bin;E:\\JAVA软件\\jdk1.8jre\\bin;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\WINDOWS\\system32;%mysql\\bin%;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\110\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\120\\DTS\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\Binn\\ManagementStudio\\;C:\\Program Files (x86)\\Microsoft SQL Server\\120\\DTS\\Binn\\;G:\\Mysql\\bin;D:\\DreamWeaver\\Adobe Dreamweaver CC 2018；C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin;F:\\Node.js\\;G:\\Git\\Git\\bin;G:\\Maven\\apache-maven-3.2.5\\bin;D:\\apache-tomcat-8.5.51\\bin;D:\\apache-tomcat-8.5.51\\lib;C:\\Program Files\\TortoiseGit\\bin;C:\\Users\\Lenovo\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\modeltech64_10.4\\win64;E:\\Modelsim\\win64;E:\\modeltech64_10.4\\win64;F:\\modeltech64_10.4\\win64;F:\\Modelsim\\win64;F:\\\\win64;F:\\新建文件夹\\win32;G:\\VS code\\Microsoft VS Code\\bin;F:\\vscode\\Microsoft VS Code\\bin;G:\\Bandzip\\;C:\\Users\\Lenovo\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 158 Stepping 9, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "9e09",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\PowerShell\\Modules\\",
+    "PT5HOME": "F:\\Packet Tracer 6.0\\Cisco Packet Tracer 5.3",
+    "PUBLIC": "C:\\Users\\Public",
+    "QSYS_ROOTDIR": "E:\\Quartus\\quartus\\sopc_builder\\bin",
+    "QUARTUS_ROOTDIR": "E:\\Quartus\\quartus",
+    "SESSIONNAME": "Console",
+    "SOPC_KIT_NIOS2": "E:\\Quartus\\nios2eds",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "D:\\Temp\\",
+    "TMP": "D:\\Temp\\",
+    "USERDOMAIN": "LAPTOP-M4FEVNHJ",
+    "USERDOMAIN_ROAMINGPROFILE": "LAPTOP-M4FEVNHJ",
+    "USERNAME": "Lenovo",
+    "USERPROFILE": "C:\\Users\\Lenovo",
+    "windir": "C:\\WINDOWS",
+    "WXDRIVE_START_ARGS": "--wxdrive-setting=0 --disable-gpu --disable-software-rasterizer --enable-features=NetworkServiceInProcess"
+  },
+  "sharedObjects": [
+    "F:\\Node.js\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\powrprof.dll",
+    "C:\\WINDOWS\\SYSTEM32\\UMPDC.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\SYSTEM32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\System32\\bcryptprimitives.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\WINDOWS\\System32\\fwpuclnt.dll",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll"
+  ]
+}

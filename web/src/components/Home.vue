@@ -1,7 +1,7 @@
 <template>
      <el-container>
     <el-header>
-       <img :src="imgUrl" alt="图片加载失败" class="logo">
+       <img :src="imgUrl" :alt="imgFailure" class="logo">
       <div class="title">{{title}}</div>
       <div class="timeBox">{{time}}
         <span class='time'></span>
@@ -12,7 +12,7 @@
     <el-row class="tac">
   <el-col>
     <el-menu
-      default-active="this.$router.path"
+      :default-active="this.currentKey"
       class="el-menu-vertical-demo"
       @select="handleSelect"
       background-color="#545c64"
@@ -20,31 +20,31 @@
       active-text-color="#ffd04b">
         <el-menu-item index="/Screen">
         <i class="el-icon-video-camera"></i>
-        <span slot="title">数据大屏展示</span>
+        <span slot="title" >{{itemArr[0]}}</span>
       </el-menu-item>
       <el-menu-item index="/ChinaMap">
         <i class="el-icon-location"></i>
-        <span slot="title">中国疫情地图</span>
+        <span slot="title">{{itemArr[1]}}</span>
       </el-menu-item>
        <el-menu-item index="/WorldMap">
         <i class="el-icon-location"></i>
-        <span slot="title">世界疫情地图</span>
+        <span slot="title" >{{itemArr[2]}}</span>
       </el-menu-item>
       <el-menu-item index="/Statistics/globalStatistics">
         <i class="el-icon-menu"></i>
-        <span slot="title">全球各国数据</span>
+        <span slot="title" >{{itemArr[3]}}</span>
       </el-menu-item>
       <el-menu-item index="/CHN/provinceAll/dailyNew">
         <i class="el-icon-document"></i>
-        <span slot="title">中国各省数据</span>
+        <span slot="title" >{{itemArr[4]}}</span>
       </el-menu-item>
       <el-menu-item index="/CHN/cityAll/dailyNew">
         <i class="el-icon-setting"></i>
-        <span slot="title">中国城市数据</span>
+        <span slot="title" >{{itemArr[5]}}</span>
       </el-menu-item>
        <el-menu-item index="/Rumors">
         <i class="el-icon-s-marketing"></i>
-        <span slot="title">疫情推送信息</span>
+        <span slot="title">{{itemArr[6]}}</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -60,6 +60,7 @@
 import logo from '@/assets/logo.png'
 import $ from 'jquery'
 
+// 动态获取系统当前时间
 $(function(){
   function current(){
   let d = new Date()
@@ -80,17 +81,38 @@ export default {
         return {
             activeIndex: '1',
             imgUrl:logo,
-            title: '疫 情 可 视 化 信 息 数 据 分 析 平 台',
-            time:'系 统 当 前 时 间 ：'
+            title: this.$store.state.projectTitle,
+            time: this.$store.state.projectTime,
+            itemArr:this.$store.state.itemArr,
+            imgFailure: this.$store.state.imgFailure,
+            currentKey: ''
         }
+    },
+    mounted(){
+      if(window.name == ""){
+          this.currentKey = '/Screen'
+       // 在首次进入页面时我们给window.name设置一个固定值(isRefresh) 
+           window.name = "isRefresh"; 
+       }else if(window.name == "isRefresh"){
+           this.currentKey = this.formatting(window.location.hash)
+       }
+    },
+    destroyed() {
+      window.name = "";
     },
     methods: {
       handleSelect(key, keyPath) {
-    //     this.$router.push(key).catch(err => {
-    //     console.log(err)
-    //   })
         this.$router.push(key)
-        console.log(key,keyPath);
+      },
+      formatting(str){
+        let arr = str.split('')
+        let newStr = ''
+        arr.forEach((item,index) => {
+          if(index !== 0){
+            newStr += item
+          }
+        })
+        return newStr
       }
     }
 }

@@ -9,9 +9,9 @@
         </div>
         <div class="c1">
            <el-row>
-           <el-button type="success" @click="getGuoNei">国内</el-button>
-           <el-button type="danger" @click="getGuoJi">国际</el-button>
-           <el-button type="primary" @click="getQuanQiu">全球</el-button>
+           <el-button type="success" @click="getGuoNei">{{GlobalType[0]}}</el-button>
+           <el-button type="danger" @click="getGuoJi">{{GlobalType[1]}}</el-button>
+           <el-button type="primary" @click="getQuanQiu">{{GlobalType[2]}}</el-button>
           </el-row>
             <div class="num">
                 <h1>{{numArr[0].num}}</h1>
@@ -60,7 +60,8 @@ import PieChart from '@/components/PieChart'
 export default {
     data(){
         return {
-            numArr:[{title:'累计确诊',num:0},{title:'当前确诊',num:0},{title:'累计治愈',num:0},{title:'累计死亡',num:0}],
+            GlobalType: this.$store.state.GlobalType,
+            numArr: this.$store.state.ShowTitle,
             numData:[],
             time: 0,
             isExist: true
@@ -68,7 +69,7 @@ export default {
     },
     created(){
         // 得到最新统计数据
-        this.axios.get('http://127.0.0.1:3000/api/statistics').then((res)=>{
+        this.axios.get('/statistics').then((res)=>{
              this.numData = res.data
              this.numArr[0].num = res.data[1].confirmedCount
              this.numArr[1].num = res.data[1].currentConfirmedCount
@@ -76,7 +77,7 @@ export default {
              this.numArr[3].num = res.data[1].deadCount
         })
         // 得到服务器端时间
-        this.axios.get('http://127.0.0.1:3000/api/getTime').then((res) => {
+        this.axios.get('/getTime').then((res) => {
             this.time = res.data
         })
     },

@@ -58,7 +58,7 @@ export default {
       }
     },
     created(){
-          this.axios.get('http://127.0.0.1:3000/api/countries/USA').then((res)=>{
+          this.axios.get('/countries/USA').then((res)=>{
               this.tableData = res.data
         })
     },

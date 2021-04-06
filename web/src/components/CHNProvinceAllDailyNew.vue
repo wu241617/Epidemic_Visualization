@@ -71,7 +71,7 @@ export default {
       },
       serach(){
         if(this.input && this.input !== ''){
-           this.axios.post('http://127.0.0.1:3000/api/countries/CHN/province',qs.stringify({'provinceName':this.input}),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res) => {
+           this.axios.post('/countries/CHN/province',qs.stringify({'provinceName':this.input}),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res) => {
           this.tableData = res.data
            if(res.data && res.data.length !== 0){
              this.open2()
@@ -80,7 +80,7 @@ export default {
           }
         })
         }else{
-           this.axios.get('http://127.0.0.1:3000/api/countries/CHN').then((res)=>{
+           this.axios.get('/countries/CHN').then((res)=>{
               this.tableData = res.data
                if(res.data && res.data.length !== 0){
              this.open2()
@@ -108,7 +108,7 @@ export default {
       }
     },
     created(){
-          this.axios.get('http://127.0.0.1:3000/api/countries/CHN').then((res)=>{
+          this.axios.get('/countries/CHN').then((res)=>{
               this.tableData = res.data
         })
     },

@@ -11,7 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 import axios from 'axios'
-
+// 配置请求根路径
+axios.defaults.baseURL = 'http://127.0.0.1:3000/api'
+    // 挂载到vue
 Vue.prototype.axios = axios
 import qs from 'qs'
 

@@ -71,11 +71,11 @@ export default {
     },
     created(){
         // 获得推荐数据
-        this.axios.get('http://127.0.0.1:3000/api/statistics/recommends').then((res) => {
+        this.axios.get('/statistics/recommends').then((res) => {
             this.recArr = res.data
         })
         // rumors 数据
-        this.axios.get('http://127.0.0.1:3000/api/statistics/rumors').then((res) => {
+        this.axios.get('/statistics/rumors').then((res) => {
             this.rumorsArr = res.data
         })
     },

@@ -7,9 +7,11 @@
              <el-input
               placeholder="请输入内容"
               prefix-icon="el-icon-search"
-              v-model="input">
+              v-model="input"
+              clearable
+              @keydown.enter.native="serach">
             </el-input>
-             <el-button type="primary" @click="serach">{{btnText}}</el-button>
+             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
           </el-row>
           <el-table
             :data="tableData"
@@ -142,7 +144,7 @@ export default {
     margin-bottom:20px;
   }
   .el-button{
-    width:50px;
+    width:65px;
     height:30px;
     padding:0;
     margin-left:20px;

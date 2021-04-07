@@ -114,7 +114,7 @@ app.get('/api/countries/daily', async(req, res) => {
 // 获取某个国家的每日统计数据，返回结果会根据国家编码（从小到大）、日期（从小到大）排列。
 // post 请求,前端需要传参 countryName
 app.post('/api/countries/daily/country', async(req, res) => {
-        let strSql = 'select * from daily where countryName=' + req.body.countryName
+        let strSql = 'select * from daily where countryName="' + req.body.countryName + '"'
         let result = await sqlQuery(strSql)
         res.json(Array.from(result))
     })

@@ -57,7 +57,7 @@
 </el-container>
 </template>
 <script>
-import logo from '@/assets/logo.png'
+import logo from '@/assets/img/logo.png'
 import $ from 'jquery'
 
 // 动态获取系统当前时间
@@ -180,14 +180,17 @@ export default {
   .title{
     width:30%;
     height:10%;
-    color:white;
     font-size:22px;
     display:flex;
     justify-content: center;
     align-items: center;
+    color: white; 
+    text-shadow: black 0.1em 0.1em 0.2em
 }
 .timeBox{
   font-size:14px;
   margin-left:100px;
+  color: white; 
+  text-shadow: black 0.1em 0.1em 0.2em
 }
 </style>

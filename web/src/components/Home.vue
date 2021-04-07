@@ -1,6 +1,6 @@
 <template>
      <el-container>
-    <el-header>
+    <el-header :style="note">
       <Header></Header>
     </el-header>
     <el-container>
@@ -18,6 +18,15 @@ import Header from '@/components/Header.vue'
 import Aside from '@/components/Aside.vue'
 
 export default {
+    data(){
+      return {
+        note: {
+          backgroundImage: "url(" + require("@/assets/img/bage.png") + ")",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+         }
+      }
+    },
     components:{
       Header,
       Aside
@@ -39,7 +48,7 @@ export default {
     align-items: center;
     height: 12%;
     width:100%;
-    background-color: rgb(84, 92, 100);
+    border-bottom:1px solid white;
   }
 
   .el-header ul{
@@ -47,18 +56,19 @@ export default {
   }
   
   .el-aside {
-    background-color: rgb(84, 92, 100);
-    color: #333;
+    color: white; 
+    text-shadow: black 0.1em 0.1em 0.2em;
     text-align: center;
     height: 100%;
     width:cacl(100vw-200px);
+    background-color: rgb(84, 92, 100);
+    border-right:0.5px solid white;
   }
   .el-aside ul{
     border:none;
   }
   
   .el-main {
-    background-color: #E9EEF3;
     color: white;
     height: 100%;
     position: relative;

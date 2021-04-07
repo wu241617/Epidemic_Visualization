@@ -45,13 +45,13 @@ export default {
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(84, 92, 100);
+    margin-left:120px;
 }
 .logo{
       width:40px;
       height:65%;
       border-radius: 50%;
-      margin-left:500px;
+      animation:move 3s infinite linear;
   }
 .title{
     width:30%;
@@ -61,13 +61,18 @@ export default {
     justify-content: center;
     align-items: center;
     color: white; 
-    text-shadow: black 0.1em 0.1em 0.2em
+    text-shadow: black 0.1em 0.1em 0.2em;
+    margin-right:300px;
 }
 .timeBox{
   font-size:14px;
   margin-left:100px;
   color: white; 
-  text-shadow: black 0.1em 0.1em 0.2em
+  text-shadow: black 0.1em 0.1em 0.2em;
 }
-</style>>
+@keyframes move{
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+}
+</style>
 

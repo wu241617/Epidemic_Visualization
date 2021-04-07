@@ -83,7 +83,6 @@ export default {
     .body1{
         width:100%;
         height:100%;
-        background-color: rgb(84, 92, 100);
         color: #333;
         text-align: center;
     }

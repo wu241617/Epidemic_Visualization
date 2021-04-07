@@ -28,7 +28,8 @@
                     label="日期"
                    >
                     </el-table-column>
-                    <el-table-column
+                    <template v-if="GlobalExit">
+                         <el-table-column
                     prop="countryName"
                     label="国家">
                     </el-table-column>
@@ -36,6 +37,17 @@
                     prop="countryCode"
                     label="编码">
                     </el-table-column>
+                    </template>
+                    <template v-if="CHNPrivinceExit">
+                         <el-table-column
+                    prop="provinceName"
+                    label="省份">
+                    </el-table-column>
+                    <el-table-column
+                    prop="provinceCode"
+                    label="编码">
+                    </el-table-column>
+                    </template>
                     <el-table-column
                     prop="confirmedCount"
                     label="确诊"
@@ -64,25 +76,42 @@ import qs from 'qs'
 export default {
     props:{
         isExit:Boolean,
-        rowData:Object
+        rowData:Object,
+        type:String
     },
     data(){
         return {
-            titleText: this.rowData.countryName ? this.rowData.countryName : '未知',
+            titleText: '',
             date:'',
             data:[],
             dateObj:this.$store.state.dateObj,
             tableData:[],
             title1:'查询',
-            title2:'数据支持查询范围：（2020-02 至 2021-01）'
+            title2:'数据支持查询范围：（2020-02 至 2021-01）',
+            GlobalExit:false,
+            CHNPrivinceExit:false
         }
     },
     mounted(){
-        this.axios.post('/countries/daily/country',qs.stringify({'countryName':this.rowData.countryName}),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res)=>{
-            this.data = res.data
-        })
+        switch(this.type){
+            case 'Global':
+                this.request('/countries/daily/country',{'countryName':this.rowData.countryName})
+                this.titleText = this.rowData.countryName,
+                this.GlobalExit = true
+                break;
+            case 'CHNPrivince':
+                this.request('/provinces/CHN/daily/province',{'provinceName':this.rowData.provinceName})
+                this.titleText = this.rowData.provinceName
+                this.CHNPrivinceExit = true
+                break;
+        }
     },
     methods:{
+        request(url,obj){
+            this.axios.post(url,qs.stringify(obj),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res)=>{
+            this.data = res.data
+        })
+        },
       closeBtn(){
           this.$emit('event',false)
       },
@@ -111,16 +140,32 @@ export default {
         }else{
             this.data.forEach((item,index) => {
                 if(item.dateId == this.format(this.date)){
-                    let obj = {
-                        countryName: item.countryName,
-                        dateId:item.dateId,
-                        countryCode:item.countryCode,
-                        confirmedCount:item.confirmedCount,
-                        confirmedIncr:item.confirmedIncr,
-                        deadCount:item.deadCount,
-                        curedCount:item.curedCount
+                    switch(this.type){
+                        case 'Global':
+                            let obj = {
+                                countryName: item.countryName,
+                                dateId:item.dateId,
+                                countryCode:item.countryCode,
+                                confirmedCount:item.confirmedCount,
+                                confirmedIncr:item.confirmedIncr,
+                                deadCount:item.deadCount,
+                                curedCount:item.curedCount
+                            }
+                            this.tableData.push(obj)
+                            break;
+                        case 'CHNPrivince':
+                            let obj1 = {
+                                provinceName: item.provinceName,
+                                dateId:item.dateId,
+                                provinceCode:item.provinceCode,
+                                confirmedCount:item.confirmedCount,
+                                confirmedIncr:item.confirmedIncr,
+                                deadCount:item.deadCount,
+                                curedCount:item.curedCount
+                            }
+                            this.tableData.push(obj1)
+                            break;
                     }
-                    this.tableData.push(obj)
                 }
             })
         }

@@ -13,7 +13,7 @@
             </el-input>
              <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
           </el-row>
-          <Global v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData"></Global>
+          <Global v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Global>
           <div class="float" v-if="isExit"></div>
           <el-table
             :data="tableData"
@@ -85,7 +85,8 @@ export default {
         btnText:'查询',
         isExit:false,
         rowData:{},
-        title1:'日期查询'
+        title1:'日期查询',
+        type:'Global'
       }
     },
     components:{

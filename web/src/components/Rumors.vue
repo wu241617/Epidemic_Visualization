@@ -6,11 +6,12 @@
             <el-tab-pane label="相关文章" name="first" >
               <el-card class="box-card" v-if="isExit">
                 <div slot="header" class="clearfix">
-                  <span>{{title}}</span>
+                  <el-tag type="success">{{title}}</el-tag>
                   <el-button type="danger" icon="el-icon-close" class="close" circle @click="closeBtn"></el-button>
                 </div>
-                <div>{{mainBody}}</div>
+                <div class="mainBody">{{mainBody}}</div>
               </el-card>
+              <div class="float" v-if="isExit"></div>
 
               <el-table
                 :data="rumorsArr"
@@ -100,6 +101,20 @@ export default {
 </script>
 
 <style  scoped>
+.el-table{
+    /* background-color:rgba(0,0,0,.4); */
+    position:relative;
+    z-index:1;
+}
+.float{
+   width:100%;
+   height:100%;
+   background-color:rgba(0,0,0,.1);
+   position:absolute;
+   top:0;
+   left:0;
+   z-index:2;
+ }
 .el-card{
     max-height:620px;
 }
@@ -180,5 +195,10 @@ export default {
   .close:hover{
       background:white;
       color:red;
+  }
+  .mainBody{
+    letter-spacing:2px;
+    line-height:25px;
+    text-indent:2em;
   }
 </style>

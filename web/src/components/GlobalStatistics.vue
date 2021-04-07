@@ -14,6 +14,7 @@
              <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
           </el-row>
           <Global v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData"></Global>
+          <div class="float" v-if="isExit"></div>
           <el-table
             :data="tableData"
             border
@@ -154,8 +155,18 @@ export default {
 
 <style scoped>
 .el-table{
-    background-color:rgba(0,0,0,.4);
+    position:relative;
+    z-index:1;
 }
+.float{
+   width:100%;
+   height:100%;
+   background-color:rgba(0,0,0,.3);
+   position:absolute;
+   top:0;
+   left:0;
+   z-index:2;
+ }
     .el-table .warning-row {
     background: oldlace;
   }
@@ -186,5 +197,4 @@ export default {
     margin-bottom:20px;
     font-size:12px;
   }
- 
 </style>>

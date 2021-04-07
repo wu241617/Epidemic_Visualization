@@ -11,7 +11,8 @@
     props: ["userJson"],
     data() {
       return {
-        chart: null
+        chart: null,
+        text:'非湖北地区省确诊TOP5'
       };
     },
     mounted() {
@@ -28,58 +29,57 @@
       chinaConfigure() {
         let myChart = echarts.init(this.$refs.myEchart,"dark"); //这里是为了获得容器所在位置    
         window.onresize = myChart.resize;
-let option_right1 = {
-	title: {
-		text: '非湖北地区省确诊TOP5',
-		textStyle: {
-			 fontSize: 13,
-       color:'white'
-		},
-		left: 'center'
-	},
-	// grid: {
-	// 	left: 50,
-	// 	top: 50,
-	// 	right: 0,
-	// 	width: '87%',
-	// 	height: 320,
-	// },
-	color: ['#3398DB'],
-	tooltip: {
-		trigger: 'axis',
-		axisPointer: {
-			type: 'shadow'
-		}
-	},
-  //工具框，可以选择
-      	toolbox: {
-      		feature: {
-      			saveAsImage: {} //下载工具
-      		}
-      	},
-	//全局字体样式
-	// textStyle: {
-	// 	fontFamily: 'PingFangSC-Medium',
-	// 	fontSize: 12,
-	// 	color: '#858E96',
-	// 	lineHeight: 12
-	// },
-	xAxis: {
-		type: 'category',
-		//                              scale:true,
-		data: []
-	},
-	yAxis: {
-		type: 'value',
-		//坐标轴刻度设置
-		},
-	series: [{
-		type: 'bar',
-		data: [],
-		barMaxWidth: "50%"
-	}]
-};
-
+        let option_right1 = {
+          title: {
+            text: this.text,
+            textStyle: {
+              fontSize: 13,
+              color:'white'
+            },
+            left: 'center'
+          },
+          // grid: {
+          // 	left: 50,
+          // 	top: 50,
+          // 	right: 0,
+          // 	width: '87%',
+          // 	height: 320,
+          // },
+          color: ['#3398DB'],
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          //工具框，可以选择
+          toolbox: {
+            feature: {
+              saveAsImage: {} //下载工具
+            }
+          },
+          //全局字体样式
+          // textStyle: {
+          // 	fontFamily: 'PingFangSC-Medium',
+          // 	fontSize: 12,
+          // 	color: '#858E96',
+          // 	lineHeight: 12
+          // },
+          xAxis: {
+            type: 'category',
+            // scale:true,
+            data: []
+          },
+          yAxis: {
+            type: 'value',
+            //坐标轴刻度设置
+            },
+          series: [{
+            type: 'bar',
+            data: [],
+            barMaxWidth: "50%"
+          }]
+        };
         $.ajax({
           url:"http://127.0.0.1:3000/api/countries/CHN",
           success:function(data){

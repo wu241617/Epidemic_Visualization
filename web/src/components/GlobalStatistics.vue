@@ -5,55 +5,55 @@
            <el-tag type="danger">{{title}}</el-tag>
           <el-row>
              <el-input
-    placeholder="请输入内容"
-    prefix-icon="el-icon-search"
-    v-model="input">
-  </el-input>
-  <el-button type="primary" @click="serach">查询</el-button>
+              placeholder="请输入内容"
+              prefix-icon="el-icon-search"
+              v-model="input">
+            </el-input>
+             <el-button type="primary" @click="serach">{{btnText}}</el-button>
           </el-row>
-             <el-table
-    :data="tableData"
-    border
-    stripe
-    max-height="475"
-    style="width: 100%"
-    :row-class-name="tableRowClassName">
-    <!-- <el-table-column
-      prop="id"
-      label="#"
-      width="80">
-    </el-table-column> -->
-    <el-table-column
-      prop="countryName"
-      label="国家">
-    </el-table-column>
-    <el-table-column
-      prop="countryCode"
-      label="编码">
-    </el-table-column>
-    <el-table-column
-      prop="confirmedCount"
-      label="确诊"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="confirmedIncr"
-      label="新增"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="deadCount"
-      label="死亡">
-    </el-table-column>
-    <el-table-column
-      prop="curedCount"
-      label="治愈">
-    </el-table-column>
-    <el-table-column
-      prop="continents"
-      label="地区">
-    </el-table-column>
-  </el-table>
+          <el-table
+            :data="tableData"
+            border
+            stripe
+            max-height="475"
+            style="width: 100%"
+            :row-class-name="tableRowClassName">
+            <!-- <el-table-column
+              prop="id"
+              label="#"
+              width="80">
+            </el-table-column> -->
+            <el-table-column
+              prop="countryName"
+              label="国家">
+            </el-table-column>
+            <el-table-column
+              prop="countryCode"
+              label="编码">
+            </el-table-column>
+            <el-table-column
+              prop="confirmedCount"
+              label="确诊"
+              >
+            </el-table-column>
+            <el-table-column
+              prop="confirmedIncr"
+              label="新增"
+              >
+            </el-table-column>
+            <el-table-column
+              prop="deadCount"
+              label="死亡">
+            </el-table-column>
+            <el-table-column
+              prop="curedCount"
+              label="治愈">
+            </el-table-column>
+            <el-table-column
+              prop="continents"
+              label="地区">
+            </el-table-column>
+          </el-table>
         </el-card>
     </div>
 </template>
@@ -64,7 +64,10 @@ export default {
       return {
         tableData: [],
         input:'',
-        title:'根 据 国 家 名 称 筛 选'
+        title:'根 据 国 家 名 称 筛 选',
+        successMessage:'条件查询数据成功！',
+        falieMessage:'条件查询数据失败！',
+        btnText:'查询'
       }
     },
      methods: {
@@ -100,7 +103,7 @@ export default {
       open2() {
         this.$message({
           showClose: true,
-          message: '条件查询数据成功！',
+          message: this.successMessage,
           type: 'success',
           offset:130
         });
@@ -108,7 +111,7 @@ export default {
       open4() {
         this.$message({
           showClose: true,
-          message: '条件查询数据失败！',
+          message: this.falieMessage,
           type: 'error',
           offset:130
         });

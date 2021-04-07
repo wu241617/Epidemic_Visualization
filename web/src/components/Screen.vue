@@ -82,8 +82,6 @@ export default {
         })
     },
     components:{
-        // ChinaMap,
-        // WorldMap,
         LineChart,
         LineChart1,
         BarChart,
@@ -108,12 +106,6 @@ export default {
              this.numArr[1].num = this.numData[0].currentConfirmedCount
              this.numArr[2].num = this.numData[0].curedCount
              this.numArr[3].num = this.numData[0].deadCount
-        },
-        getChinaMap(){
-           this.isExist = true
-        },
-        getWorldMap(){
-            this.isExist = false
         }
     }
 }

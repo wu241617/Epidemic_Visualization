@@ -1,59 +1,63 @@
 <template>
     <!-- 最新整体统计 -->
     <div>
-        <el-card>
-             <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="相关文章" name="first" >
-        <el-card class="box-card" v-if="isExit">
-  <div slot="header" class="clearfix">
-    <span>{{title}}</span>
-    <el-button type="danger" icon="el-icon-close" class="close" circle @click="closeBtn"></el-button>
-  </div>
-  <div>{{mainBody}}</div>
-</el-card>
-        <el-table
-    :data="rumorsArr"
-    border
-    style="width: 100%" max-height="550">
-    <el-table-column
-      fixed
-      prop="title"
-      label="标题"
-     >
-    </el-table-column>
-    <el-table-column
-      prop="mainSummary"
-      label="主要总结"
-      >
-    </el-table-column>
-    <el-table-column
-      prop="body"
-      label="主体内容"
-      width="500">
-    </el-table-column>
-    <el-table-column
-      prop="score"
-      label="文章编号"
-      width="80"
-     >
-    </el-table-column>
-    <el-table-column
-      fixed="right"
-      label="操作"
-      width="60">
-      <template slot-scope="scope">
-        <el-button @click="handleClick1(scope.row)" type="text" size="small">查看</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
-    </el-tab-pane>
-    <el-tab-pane label="推荐信息" name="third" class="third">
-        <div v-for="item in recArr" :key="item.id" class="rec">
-            <img :src="item.imgUrl" alt="图片加载失败！">
-            <a :href="item.linkUrl">{{item.title}}</a>
-        </div>
-    </el-tab-pane>
-  </el-tabs>
+          <el-card>
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="相关文章" name="first" >
+              <el-card class="box-card" v-if="isExit">
+                <div slot="header" class="clearfix">
+                  <span>{{title}}</span>
+                  <el-button type="danger" icon="el-icon-close" class="close" circle @click="closeBtn"></el-button>
+                </div>
+                <div>{{mainBody}}</div>
+              </el-card>
+
+              <el-table
+                :data="rumorsArr"
+                border
+                style="width: 100%" max-height="550">
+                <el-table-column
+                  fixed
+                  prop="title"
+                  label="标题"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="mainSummary"
+                  label="主要总结"
+                  >
+                </el-table-column>
+                <el-table-column
+                  prop="body"
+                  label="主体内容"
+                  width="500">
+                </el-table-column>
+                <el-table-column
+                  prop="score"
+                  label="文章编号"
+                  width="80"
+                >
+                </el-table-column>
+                <el-table-column
+                  fixed="right"
+                  label="操作"
+                  width="60">
+                  <template slot-scope="scope">
+                    <el-button @click="handleClick1(scope.row)" type="text" size="small">查看</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+
+        </el-tab-pane>
+
+        <el-tab-pane label="推荐信息" name="third" class="third">
+            <div v-for="item in recArr" :key="item.id" class="rec">
+                <img :src="item.imgUrl" alt="图片加载失败！">
+                <a :href="item.linkUrl">{{item.title}}</a>
+            </div>
+        </el-tab-pane>
+        
+        </el-tabs>
         </el-card>
     </div>
 </template>

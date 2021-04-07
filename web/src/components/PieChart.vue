@@ -11,7 +11,8 @@
     props: ["userJson"],
     data() {
       return {
-        chart: null
+        chart: null,
+        text:'世界国家确诊Top5'
       };
     },
     mounted() {
@@ -28,46 +29,45 @@
       chinaConfigure() {
         let myChart = echarts.init(this.$refs.myEchart,"dark"); //这里是为了获得容器所在位置    
         window.onresize = myChart.resize;
-let option = {
-    title: {
-        text: '世界国家确诊Top5',
-        subtext: '',
-        left: 'center',
-        textStyle: {
-			fontSize: 13,
-            color:'white'
-		},
-    },
-    tooltip: {
-        trigger: 'item'
-    },
-    //工具框，可以选择
-      	toolbox: {
-      		feature: {
-      			saveAsImage: {} //下载工具
-      		}
-      	},
-    legend: {
-        orient: 'vertical',
-        left: 'left',
-    },
-    series: [
-        {
-            name: '访问来源',
-            type: 'pie',
-            radius: '50%',
-            data: [],
-            emphasis: {
-                itemStyle: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+        let option = {
+            title: {
+                text: this.text,
+                subtext: '',
+                left: 'center',
+                textStyle: {
+              fontSize: 13,
+                    color:'white'
+            },
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            //工具框，可以选择
+                toolbox: {
+                  feature: {
+                    saveAsImage: {} //下载工具
+                  }
+                },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '确诊人数',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
                 }
-            }
-        }
-    ]
-};
-
+            ]
+        };
         $.ajax({
           url:"http://127.0.0.1:3000/api/countries",
           success:function(data){

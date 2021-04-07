@@ -13,7 +13,7 @@
             </el-input>
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
           </el-row>
-           <Global v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Global>
+           <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
           <div class="float" v-if="isExit"></div>
           <el-table
             :data="tableData"
@@ -71,7 +71,7 @@
 </template>
 <script>
 import qs from 'qs'
-import Global from '@/components/Global.vue'
+import DateQuery from '@/components/DateQuery.vue'
 
 export default {
     data() {
@@ -89,7 +89,7 @@ export default {
         }
     },
      components:{
-      Global
+      DateQuery
     },
      methods: {
        cls($event){

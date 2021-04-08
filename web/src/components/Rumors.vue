@@ -1,157 +1,72 @@
 <template>
     <!-- 最新整体统计 -->
-    <div>
-          <el-card>
-            <el-tabs v-model="activeName" @tab-click="handleClick">
+  <div>
+    <el-card ref="dom">
+        <el-tabs v-model="activeName" @tab-click="handleClick" >
             <el-tab-pane label="相关文章" name="first" >
-              <el-card class="box-card" v-if="isExit">
-                <div slot="header" class="clearfix">
-                  <el-tag type="success">{{title}}</el-tag>
-                  <el-button type="danger" icon="el-icon-close" class="close" circle @click="closeBtn"></el-button>
-                </div>
-                <div class="mainBody">{{mainBody}}</div>
-              </el-card>
-              <div class="float" v-if="isExit"></div>
-
-              <el-table
-                :data="rumorsArr"
-                border
-                style="width: 100%" max-height="550">
-                <el-table-column
-                  fixed
-                  prop="title"
-                  label="标题"
-                >
-                </el-table-column>
-                <el-table-column
-                  prop="mainSummary"
-                  label="主要总结"
-                  >
-                </el-table-column>
-                <el-table-column
-                  prop="body"
-                  label="主体内容"
-                  width="500">
-                </el-table-column>
-                <el-table-column
-                  prop="score"
-                  label="文章编号"
-                  width="80"
-                >
-                </el-table-column>
-                <el-table-column
-                  fixed="right"
-                  label="操作"
-                  width="60">
-                  <template slot-scope="scope">
-                    <el-button @click="handleClick1(scope.row)" type="text" size="small">查看</el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
-
-        </el-tab-pane>
-
-        <el-tab-pane label="推荐信息" name="third" class="third">
-            <div v-for="item in recArr" :key="item.id" class="rec">
-                <img :src="item.imgUrl" alt="图片加载失败！">
-                <a :href="item.linkUrl">{{item.title}}</a>
-            </div>
-        </el-tab-pane>
-        
-        </el-tabs>
-        </el-card>
-    </div>
+              <Related-Articles></Related-Articles>
+            </el-tab-pane>
+            <el-tab-pane label="防疫指南" name="second">
+              <Guides></Guides>
+            </el-tab-pane>
+            <el-tab-pane label="推荐信息" name="third" class="third">
+              <Rec-Info></Rec-Info>
+            </el-tab-pane>
+            <el-tab-pane label="相关新闻" name="fourth" class="third">
+              <Related-News></Related-News>
+            </el-tab-pane>
+      </el-tabs>
+   </el-card>
+  </div>
 </template>
 <script>
+import RelatedArticles from '@/components/RelatedArticles.vue'
+import RecInfo from '@/components/RecInfo.vue'
+import Guides from '@/components/Guides.vue'
+import RelatedNews from '@/components/RelatedNews.vue'
+
 export default {
     data() {
       return {
-        activeName: 'first',
-        recArr:[],
-        rumorsArr:[],
-        isExit:false,
-        title:'文章标题',
-        mainBody:'文章内容'
+         activeName: 'first'
       };
     },
-    created(){
-        // 获得推荐数据
-        this.axios.get('/statistics/recommends').then((res) => {
-            this.recArr = res.data
-        })
-        // rumors 数据
-        this.axios.get('/statistics/rumors').then((res) => {
-            this.rumorsArr = res.data
-        })
+    components:{
+      RelatedArticles,
+      RecInfo,
+      Guides,
+      RelatedNews
     },
-    methods: {
+    methods:{
       handleClick(tab, event) {
-        console.log(tab, event);
-      },
-       handleClick1(row) {
-        this.isExit = true
-        this.title = row.title
-        this.mainBody = row.body
-      },
-      closeBtn(){
-          this.isExit = false
+        switch(tab.label){
+          case '相关文章':
+            this.$refs.dom.$el.style.overflow = 'hidden'
+            break;
+           case '防疫指南':
+            this.$refs.dom.$el.style.overflow = 'scroll'
+            break;
+          case '推荐信息':
+            this.$refs.dom.$el.style.overflow = 'scroll'
+            break;
+          case '相关新闻':
+            this.$refs.dom.$el.style.overflow = 'scroll'
+            break;
+        }
       }
     }
 }
 </script>
 
 <style  scoped>
-.el-table{
-    /* background-color:rgba(0,0,0,.4); */
-    position:relative;
-    z-index:1;
-}
-.float{
-   width:100%;
-   height:100%;
-   background-color:rgba(0,0,0,.1);
-   position:absolute;
-   top:0;
-   left:0;
-   z-index:2;
- }
 .el-card{
     max-height:620px;
+    overflow-x:hidden !important;
 }
 .third{
     display:flex;
     flex-wrap: wrap;
     min-height:500px;
-    overflow: scroll !important;
-}
-.rec{
-    width:30%;
-    height:250px;
-    margin-right:3%;
-    margin-bottom:30px;
-}
-.rec img{
-    width:100%;
-    height:200px;
-    margin-bottom:3px;
-}
-.rec a{
-    width:30%;
-    height:50px;
-    /* overflow:hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap; */
-    text-decoration: none;
-    color:rosybrown;
-    padding:3px;
-}
-.rec a:hover{
-    color:rgba(255,0,0,.5);
-}
-.main{
-    overflow:hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .text {
     font-size: 14px;

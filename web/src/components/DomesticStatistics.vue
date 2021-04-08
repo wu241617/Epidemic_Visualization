@@ -2,10 +2,13 @@
     <!-- 最新整体统计 -->
     <div class="body">
         <el-row>
-           <el-button type="success" @click="getGuoNei">{{GlobalType[0]}}</el-button>
-           <el-button type="danger" @click="getGuoJi">{{GlobalType[1]}}</el-button>
-           <el-button type="primary" @click="getQuanQiu">{{GlobalType[2]}}</el-button>
-          </el-row>
+            <span class="titleStyle">{{title}}</span>
+             <el-button-group>
+                <el-button type="success" @click="getGuoNei">{{GlobalType[0]}}</el-button>
+                <el-button type="danger" @click="getGuoJi">{{GlobalType[1]}}</el-button>
+                <el-button type="primary" @click="getQuanQiu">{{GlobalType[2]}}</el-button>
+             </el-button-group>
+        </el-row>
             <div class="num">
                 <h1>{{numArr[0].num}}</h1>
             </div>
@@ -36,6 +39,7 @@
 export default {
     data(){
         return {
+            title:'最新统计数据',
             numArr: this.$store.state.ShowTitle,
             numData:[],
             GlobalType: this.$store.state.GlobalType
@@ -78,15 +82,26 @@ export default {
     width:100%;
     height:100%;
 }
+.el-row{
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+    align-items: center;
+}
+.titleStyle{
+    font-size:13.5px;
+    color:white;
+    margin:5px 260px 0px 20px;
+}
  .el-button{
-    width:40px;
-    height:20px;
+    width:50px;
+    height:25px;
     text-align: center;
-    line-height:20px;
+    line-height:25px;
     padding:0;
-    margin-left:20px;
     opacity: 0.8;
     margin-top:10px;
+    margin-left:20px;
   }
   .num{
     width:25%;

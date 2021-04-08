@@ -61,6 +61,8 @@
 </template>
 <script>
 import qs from 'qs'
+import { Loading } from 'element-ui'
+
 export default {
      data(){
        return {
@@ -120,8 +122,19 @@ export default {
       }
     },
     created(){
+      // let loadingTable = Loading.service({
+      //         lock: true,
+      //         text: 'Loading',
+      //         spinner: 'el-icon-loading',
+      //         background: 'rgba(0, 0, 0, 0.7)'
+      //     })
           this.axios.get('/cities/CHN').then((res)=>{
-              this.tableData = res.data
+            if(res){
+              // this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+              //     loadingTable.close();
+              //   });
+                this.tableData = res.data
+            }    
         })
     }
   }

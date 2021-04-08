@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :style="{height:'331px',width:'100%'}" ref="myEchart"></div>
+    <div :style="{height:'321px',width:'96%',marginTop:'10px',padding:'0px 2%'}" ref="myEchart"></div>
   </div>
 </template>
 <script>
@@ -35,9 +35,9 @@
                 subtext: '',
                 left: 'center',
                 textStyle: {
-              fontSize: 13,
+                    fontSize: 13,
                     color:'white'
-            },
+                },
             },
             tooltip: {
                 trigger: 'item'

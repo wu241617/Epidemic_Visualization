@@ -62,7 +62,9 @@
                   label="操作"
                   >
                   <template slot-scope="scope">
-                    <el-button @click="handleClick1(scope.row)" type="text" size="small">{{title1}}</el-button>
+                    <el-tooltip class="item" effect="dark" :content="title1" placement="top-start">
+                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title1}}</el-button>
+                    </el-tooltip>
                   </template>
             </el-table-column>
           </el-table>
@@ -72,6 +74,7 @@
 <script>
 import qs from 'qs'
 import DateQuery from '@/components/DateQuery.vue'
+import { Loading } from 'element-ui'
 
 export default {
     data() {
@@ -147,7 +150,9 @@ export default {
     },
     created(){
           this.axios.get('/countries/CHN').then((res)=>{
-              this.tableData = res.data
+            if(res){
+                this.tableData = res.data
+            }
         })
     }
   }
@@ -158,6 +163,9 @@ export default {
     background-color:rgba(0,0,0,.4);
      position:relative;
     z-index:1;
+}
+.window:hover{
+  color:red;
 }
 .float{
    width:100%;

@@ -80,6 +80,7 @@ export default {
     top:25%;
     left:30%;
     border:1px solid white;
+    border-right:0;
 }
 .l1{
     position:absolute;

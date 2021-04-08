@@ -4,7 +4,9 @@
                 <div slot="header" class="clearfix">
                     <el-tag type="success">{{titleText}}</el-tag>
                     <el-tag type="danger">{{title2}}</el-tag>
-                  <el-button type="danger" icon="el-icon-close" class="close" circle @click="closeBtn"></el-button>
+                    <el-tooltip class="item" effect="dark" :content="closeTitle" placement="left-start">
+                        <el-button type="danger" icon="el-icon-close" class="close" circle @click="closeBtn" ></el-button>
+                    </el-tooltip>
                 </div>
                 <div>
                      <div class="block">
@@ -27,11 +29,18 @@
                     prop="dateId"
                     label="日期"
                    >
+                   <template slot-scope="scope">
+                        <i class="el-icon-time"></i>
+                        <span style="margin-left: 3px">{{ scope.row.dateId }}</span>
+                   </template>
                     </el-table-column>
                     <template v-if="GlobalExit">
                          <el-table-column
                     prop="countryName"
                     label="国家">
+                     <!-- <template slot-scope="scope">
+                        <el-tag size="medium">{{ scope.row.countryName }}</el-tag>
+                   </template> -->
                     </el-table-column>
                     <el-table-column
                     prop="countryCode"
@@ -42,6 +51,9 @@
                          <el-table-column
                     prop="provinceName"
                     label="省份">
+                    <!-- <template slot-scope="scope">
+                        <el-tag size="medium">{{ scope.row.provinceName }}</el-tag>
+                   </template> -->
                     </el-table-column>
                     <el-table-column
                     prop="provinceCode"
@@ -52,19 +64,31 @@
                     prop="confirmedCount"
                     label="确诊"
                     >
+                    <template slot-scope="scope">
+                        <el-tag size="medium">{{ scope.row.confirmedCount }}</el-tag>
+                   </template>
                     </el-table-column>
                     <el-table-column
                     prop="confirmedIncr"
                     label="新增"
                     >
+                    <template slot-scope="scope">
+                        <el-tag size="medium" type="warning">{{ scope.row.confirmedIncr }}</el-tag>
+                   </template>
                     </el-table-column>
                     <el-table-column
                     prop="deadCount"
                     label="死亡">
+                    <template slot-scope="scope">
+                        <el-tag size="medium" type="danger">{{ scope.row.deadCount }}</el-tag>
+                   </template>
                     </el-table-column>
                     <el-table-column
                     prop="curedCount"
-                    label="治愈">
+                    label="治愈" >
+                    <template slot-scope="scope">
+                        <el-tag size="medium" type="success">{{ scope.row.curedCount }}</el-tag>
+                   </template>
                     </el-table-column>
                 </el-table>
                 </div>
@@ -89,7 +113,8 @@ export default {
             title1:'查询',
             title2:'数据支持查询范围：（2020-02 至 2021-01）',
             GlobalExit:false,
-            CHNPrivinceExit:false
+            CHNPrivinceExit:false,
+            closeTitle:'关闭浮层'
         }
     },
     mounted(){
@@ -151,6 +176,7 @@ export default {
                                 deadCount:item.deadCount,
                                 curedCount:item.curedCount
                             }
+                            this.tableData = []
                             this.tableData.push(obj)
                             break;
                         case 'CHNPrivince':
@@ -163,6 +189,7 @@ export default {
                                 deadCount:item.deadCount,
                                 curedCount:item.curedCount
                             }
+                            this.tableData = []
                             this.tableData.push(obj1)
                             break;
                     }

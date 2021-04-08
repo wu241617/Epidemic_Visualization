@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :style="{height:'450px',width:'100%'}" ref="myEchart"></div>
+    <div :style="{height:'440px',width:'96%',marginTop:'10px'}" ref="myEchart"></div>
   </div>
 </template>
 <script>
@@ -76,7 +76,8 @@
             },
             xAxis: {
                 type: 'value',
-                boundaryGap: [0, 0.01]
+                boundaryGap: [0, 0.01],
+                axisLabel: { interval: 0, rotate: 15 }
             },
             yAxis: {
                 type: 'category',

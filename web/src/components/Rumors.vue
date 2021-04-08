@@ -50,7 +50,7 @@ export default {
             this.$refs.dom.$el.style.overflow = 'scroll'
             break;
           case '相关新闻':
-            this.$refs.dom.$el.style.overflow = 'scroll'
+            this.$refs.dom.$el.style.overflow = 'hidden'
             break;
         }
       }

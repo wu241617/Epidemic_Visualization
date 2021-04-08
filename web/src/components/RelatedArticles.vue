@@ -34,12 +34,12 @@
                   label="主体内容"
                   width="500">
                 </el-table-column>
-                <el-table-column
+                <!-- <el-table-column
                   prop="score"
                   label="文章编号"
                   width="80"
                 >
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column
                   fixed="right"
                   label="操作"
@@ -105,7 +105,6 @@ color:red;
    left:0;
    z-index:2;
  }
-
 .main{
     overflow:hidden;
     text-overflow: ellipsis;

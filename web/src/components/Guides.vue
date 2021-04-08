@@ -5,7 +5,8 @@
             <el-col :span="8">
                 <el-card  class="rec" shadow>
                     <div slot="header" class="clearfix">
-                        <el-tag class="text main">{{item.title}}</el-tag>
+                        <el-tag type="success">{{type}}</el-tag>
+                        <el-tag type="danger">{{item.title}}</el-tag>
                     </div>
                      <div>
                          <img :src="item.contentImgUrls" alt="图片加载失败！">
@@ -20,7 +21,8 @@
 export default {
     data(){
         return {
-            guidesArr:[]
+            guidesArr:[],
+            type:'类型'
         }
     },
      created(){

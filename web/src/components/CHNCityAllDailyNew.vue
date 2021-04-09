@@ -56,16 +56,30 @@
               prop="provinceName"
               label="省份">
             </el-table-column>
+            <el-table-column
+                  fixed="right"
+                  label="操作"
+                  >
+                  <template slot-scope="scope">
+                    <el-tooltip class="item" effect="dark" :content="title3" placement="top">
+                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title3}}</el-button>
+                    </el-tooltip>
+                  </template>
+            </el-table-column>
           </el-table>
         </el-card>
         <div class="container" v-if="isExit">
           <City-Bar :tableData="tableData" @event="cls($event)" :title="title1"></City-Bar>
+        </div>
+        <div class="container1" v-if="isExit1">
+          <City-Bar1 :rowData="rowData" @event1="cls1($event)"></City-Bar1>
         </div>
     </div>
 </template>
 <script>
 import qs from 'qs'
 import CityBar from '@/components/CityBar.vue'
+import CityBar1 from '@/components/CityBar1.vue'
 
 export default {
      data(){
@@ -77,16 +91,27 @@ export default {
          title:'根 据 城 市 名 称 筛 选',
          btnText:'查询',
          isExit:false,
+         isExit1:false,
          title1:'国内城市柱状图',
-         title2:'查看'
+         title2:'查看',
+         title3:'柱状图',
+         rowData:{}
        }
      },
      components:{
-       CityBar
+       CityBar,
+       CityBar1
      },
      methods: {
+      handleClick1(row) {
+       this.isExit1 = true
+       this.rowData = row
+      },
        cls($event){
          this.isExit = $event
+       },
+        cls1($event){
+         this.isExit1 = $event
        },
        exitView(){
          this.isExit = true
@@ -194,6 +219,14 @@ export default {
     position:absolute;
     top:8%;
     left:10%;
+    z-index:1000;
+  }
+  .container1{
+    width:60%;
+    height:50%;
+    position:absolute;
+    top:25%;
+    left:25%;
     z-index:1000;
   }
 </style>>

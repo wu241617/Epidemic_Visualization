@@ -12,6 +12,7 @@
               @keydown.enter.native="serach">
             </el-input>
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
+            <el-tag type="warning" style="float:right;">{{title1}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title2}}</el-button></el-tag>
           </el-row>
           <el-table
             :data="tableData"
@@ -57,11 +58,14 @@
             </el-table-column>
           </el-table>
         </el-card>
+        <div class="container" v-if="isExit">
+          <City-Bar :tableData="tableData" @event="cls($event)" :title="title1"></City-Bar>
+        </div>
     </div>
 </template>
 <script>
 import qs from 'qs'
-import { Loading } from 'element-ui'
+import CityBar from '@/components/CityBar.vue'
 
 export default {
      data(){
@@ -71,10 +75,22 @@ export default {
          tableData: [],
          input:'',
          title:'根 据 城 市 名 称 筛 选',
-         btnText:'查询'
+         btnText:'查询',
+         isExit:false,
+         title1:'国内城市柱状图',
+         title2:'查看'
        }
      },
+     components:{
+       CityBar
+     },
      methods: {
+       cls($event){
+         this.isExit = $event
+       },
+       exitView(){
+         this.isExit = true
+       },
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -122,17 +138,8 @@ export default {
       }
     },
     created(){
-      // let loadingTable = Loading.service({
-      //         lock: true,
-      //         text: 'Loading',
-      //         spinner: 'el-icon-loading',
-      //         background: 'rgba(0, 0, 0, 0.7)'
-      //     })
           this.axios.get('/cities/CHN').then((res)=>{
             if(res){
-              // this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
-              //     loadingTable.close();
-              //   });
                 this.tableData = res.data
             }    
         })
@@ -173,5 +180,20 @@ export default {
   .el-tag{
     margin-bottom:20px;
     font-size:12px;
+  }
+  .window:hover{
+    color:red;
+  }
+  .el-card{
+    position:relative;
+    z-index:999;
+  }
+  .container{
+    width:80%;
+    height:60%;
+    position:absolute;
+    top:8%;
+    left:10%;
+    z-index:1000;
   }
 </style>>

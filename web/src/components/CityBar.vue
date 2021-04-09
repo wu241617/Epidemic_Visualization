@@ -90,21 +90,34 @@ export default {
           }]
         };
         let cityNameArr = []
+        let countyNameArr = []
         let provinceNameArr = []
         let confirmedCountArr = []
-        for(let i=0; i<this.tableData.length; i++){
-            cityNameArr.push(this.tableData[i].cityName)
-            provinceNameArr.push(this.tableData[i].provinceName)
-            confirmedCountArr.push(this.tableData[i].confirmedCount)
-        }
         switch(this.type){
           case 'city':
+            for(let i=0; i<this.tableData.length; i++){
+            cityNameArr.push(this.tableData[i].cityName)
+            confirmedCountArr.push(this.tableData[i].confirmedCount)
+           }
             option_right1.xAxis.data = cityNameArr
             option_right1.series[0].data = confirmedCountArr
             myChart.setOption(option_right1)
             break;
            case 'province':
+             for(let i=0; i<this.tableData.length; i++){
+            provinceNameArr.push(this.tableData[i].provinceName)
+            confirmedCountArr.push(this.tableData[i].confirmedCount)
+          }
             option_right1.xAxis.data = provinceNameArr
+            option_right1.series[0].data = confirmedCountArr
+            myChart.setOption(option_right1)
+            break;
+          case 'county':
+            for(let i=0; i<this.tableData.length; i++){
+            countyNameArr.push(this.tableData[i].countryName)
+            confirmedCountArr.push(this.tableData[i].confirmedCount)
+            }
+            option_right1.xAxis.data = countyNameArr
             option_right1.series[0].data = confirmedCountArr
             myChart.setOption(option_right1)
             break;

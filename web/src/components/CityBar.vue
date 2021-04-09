@@ -22,7 +22,8 @@ export default {
     props:{
         tableData:Array,
         title:String,
-        chart: null
+        chart: null,
+        type:String
     },
     data(){
         return {
@@ -39,7 +40,7 @@ export default {
         window.onresize = myChart.resize;
         let option_right1 = {
           title: {
-            text: this.title,
+            text: `${this.title}（最新确诊）`,
             textStyle: {
               fontSize: 13,
               color:'white'
@@ -89,14 +90,25 @@ export default {
           }]
         };
         let cityNameArr = []
+        let provinceNameArr = []
         let confirmedCountArr = []
         for(let i=0; i<this.tableData.length; i++){
             cityNameArr.push(this.tableData[i].cityName)
+            provinceNameArr.push(this.tableData[i].provinceName)
             confirmedCountArr.push(this.tableData[i].confirmedCount)
         }
-         option_right1.xAxis.data = cityNameArr
-         option_right1.series[0].data = confirmedCountArr
-         myChart.setOption(option_right1)
+        switch(this.type){
+          case 'city':
+            option_right1.xAxis.data = cityNameArr
+            option_right1.series[0].data = confirmedCountArr
+            myChart.setOption(option_right1)
+            break;
+           case 'province':
+            option_right1.xAxis.data = provinceNameArr
+            option_right1.series[0].data = confirmedCountArr
+            myChart.setOption(option_right1)
+            break;
+        }
       }
     },
     mounted() {

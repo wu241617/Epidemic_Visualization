@@ -41,7 +41,7 @@ export default {
         window.onresize = myChart.resize;
         let option_right1 = {
           title: {
-            text: `${this.title1}柱状图`,
+            text: `${this.title1}柱状图（最新确诊）`,
             textStyle: {
               fontSize: 13,
               color:'white'

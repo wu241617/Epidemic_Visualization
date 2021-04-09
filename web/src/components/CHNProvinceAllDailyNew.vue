@@ -12,9 +12,12 @@
               @keydown.enter.native="serach">
             </el-input>
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
+            <el-tag type="warning" style="float:right;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
           </el-row>
+
            <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
           <div class="float" v-if="isExit"></div>
+
           <el-table
             :data="tableData"
               max-height="475"
@@ -69,12 +72,15 @@
             </el-table-column>
           </el-table>
         </el-card>
+         <div class="container" v-if="isExit1">
+         <City-Bar :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></City-Bar>
+        </div>
     </div>
 </template>
 <script>
 import qs from 'qs'
 import DateQuery from '@/components/DateQuery.vue'
-import { Loading } from 'element-ui'
+import CityBar from '@/components/CityBar.vue'
 
 export default {
     data() {
@@ -85,18 +91,28 @@ export default {
           successMessage:'条件查询数据成功！',
           falieMessage:'条件查询数据失败！',
           btnText:'查询',
+          isExit1:false,
           isExit:false,
           rowData:{},
           title1:'日期查询',
+          title2:'国内省份柱状图',
+          title3:'查看',
           type:'CHNPrivince'
         }
     },
      components:{
-      DateQuery
+      DateQuery,
+      CityBar
     },
      methods: {
        cls($event){
          this.isExit = $event
+       },
+       cls1($event){
+         this.isExit1 = $event
+       },
+       exitView(){
+         this.isExit1 = true
        },
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
@@ -205,5 +221,13 @@ export default {
   .el-tag{
     margin-bottom:20px;
     font-size:12px;
+  }
+  .container{
+    width:80%;
+    height:60%;
+    position:absolute;
+    top:8%;
+    left:10%;
+    z-index:1000;
   }
 </style>>

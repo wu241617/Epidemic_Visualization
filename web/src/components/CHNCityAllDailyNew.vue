@@ -69,7 +69,7 @@
           </el-table>
         </el-card>
         <div class="container" v-if="isExit">
-          <City-Bar :tableData="tableData" @event="cls($event)" :title="title1"></City-Bar>
+          <City-Bar :tableData="tableData" @event="cls($event)" :title="title1" :type="'city'"></City-Bar>
         </div>
         <div class="container1" v-if="isExit1">
           <City-Bar1 :rowData="rowData" @event1="cls1($event)"></City-Bar1>

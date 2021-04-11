@@ -92,7 +92,7 @@ export default {
          btnText:'查询',
          isExit:false,
          isExit1:false,
-         title1:'国内城市柱状图（最新统计）',
+         title1:'国内城市柱状图',
          title2:'查看',
          title3:'柱状图',
          rowData:{}

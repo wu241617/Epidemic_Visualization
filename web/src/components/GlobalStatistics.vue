@@ -105,7 +105,7 @@ export default {
         rowData:{},
         rowData1:{},
         title1:'日期查询',
-        title2:'全球各国柱状图（最新统计）',
+        title2:'全球各国柱状图',
         title3:'查看',
         title4:'柱状图',
         type:'Global'

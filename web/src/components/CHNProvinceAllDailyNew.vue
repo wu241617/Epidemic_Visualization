@@ -106,7 +106,7 @@ export default {
           rowData:{},
           rowData1:{},
           title1:'日期查询',
-          title2:'国内省份柱状图',
+          title2:'国内省份柱状图（最新统计）',
           title3:'查看',
           title4:'柱状图',
           type:'CHNPrivince'

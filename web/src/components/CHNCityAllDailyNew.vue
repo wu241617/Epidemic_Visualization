@@ -72,7 +72,7 @@
           <City-Bar :tableData="tableData" @event="cls($event)" :title="title1" :type="'city'"></City-Bar>
         </div>
         <div class="container1" v-if="isExit1">
-          <City-Bar1 :rowData="rowData" @event1="cls1($event)"></City-Bar1>
+          <City-Bar1 :rowData="rowData" @event1="cls1($event)" :type="'city'"></City-Bar1>
         </div>
     </div>
 </template>

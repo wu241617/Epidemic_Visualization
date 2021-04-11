@@ -39,7 +39,7 @@
 export default {
     data(){
         return {
-            title:'最新统计数据',
+            title:'国内最新统计数据',
             numArr: this.$store.state.ShowTitle,
             numData:[],
             GlobalType: this.$store.state.GlobalType
@@ -57,18 +57,21 @@ export default {
     },
     methods:{
         getGuoNei(){
+             this.title = '国内最新统计数据'
              this.numArr[0].num = this.numData[1].confirmedCount
              this.numArr[1].num = this.numData[1].currentConfirmedCount
              this.numArr[2].num = this.numData[1].curedCount
              this.numArr[3].num = this.numData[1].deadCount
         },
         getGuoJi(){
+             this.title = '国际最新统计数据'
              this.numArr[0].num = this.numData[2].confirmedCount
              this.numArr[1].num = this.numData[2].currentConfirmedCount
              this.numArr[2].num = this.numData[2].curedCount
              this.numArr[3].num = this.numData[2].deadCount
         },
         getQuanQiu(){
+             this.title = '全球最新统计数据'
              this.numArr[0].num = this.numData[0].confirmedCount
              this.numArr[1].num = this.numData[0].currentConfirmedCount
              this.numArr[2].num = this.numData[0].curedCount
@@ -91,7 +94,7 @@ export default {
 .titleStyle{
     font-size:13.5px;
     color:white;
-    margin:5px 260px 0px 20px;
+    margin:5px 240px 0px 20px;
 }
  .el-button{
     width:50px;

@@ -62,11 +62,16 @@
             <el-table-column
                   fixed="right"
                   label="操作"
-                  >
+                  width="200">
                   <template slot-scope="scope">
-                      <el-tooltip class="item" effect="dark" :content="title1" placement="top-start">
-                        <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view"  class="window">{{title1}}</el-button>
+                    <el-button-group>
+                      <el-tooltip class="item" effect="dark" :content="title1" placement="top-start" >
+                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title1}}</el-button>
                     </el-tooltip>
+                      <el-tooltip class="item" effect="dark" :content="title4" placement="top" style="margin-left:10px;">
+                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title4}}</el-button>
+                    </el-tooltip>
+                   </el-button-group>
                   </template>
             </el-table-column>
           </el-table>
@@ -74,12 +79,16 @@
          <div class="container" v-if="isExit1">
          <City-Bar :tableData="tableData" @event="cls1($event)" :title="title2" :type="'county'"></City-Bar>
         </div>
+         <div class="container1" v-if="isExit2">
+          <City-Bar1 :rowData="rowData1" @event1="cls2($event)" :type="'county'"></City-Bar1>
+        </div>
     </div>
 </template>
 <script>
 import qs from 'qs'
 import DateQuery from '@/components/DateQuery.vue'
 import CityBar from '@/components/CityBar.vue'
+import CityBar1 from '@/components/CityBar1.vue'
 
 export default {
    data() {
@@ -92,16 +101,20 @@ export default {
         btnText:'查询',
         isExit:false,
         isExit1:false,
+        isExit2:false,
         rowData:{},
+        rowData1:{},
         title1:'日期查询',
         title2:'全球各国柱状图',
         title3:'查看',
+        title4:'柱状图',
         type:'Global'
       }
     },
     components:{
       DateQuery,
-      CityBar
+      CityBar,
+      CityBar1
     },
      methods: {
       cls($event){
@@ -109,6 +122,9 @@ export default {
        },
        cls1($event){
          this.isExit1 = $event
+       },
+       cls2($event){
+         this.isExit2 = $event
        },
         exitView(){
          this.isExit1 = true
@@ -124,6 +140,10 @@ export default {
       handleClick1(row) {
        this.isExit = true
        this.rowData = row
+      },
+      handleClick2(row) {
+       this.isExit2 = true
+       this.rowData1 = row
       },
       serach(){
         if(this.input && this.input !== ''){
@@ -227,6 +247,14 @@ export default {
     position:absolute;
     top:8%;
     left:10%;
+    z-index:1000;
+  }
+  .container1{
+    width:60%;
+    height:50%;
+    position:absolute;
+    top:25%;
+    left:25%;
     z-index:1000;
   }
 </style>>

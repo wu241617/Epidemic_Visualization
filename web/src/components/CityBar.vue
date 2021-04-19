@@ -63,9 +63,11 @@ export default {
           },
           //工具框，可以选择
           toolbox: {
-            feature: {
-              saveAsImage: {} //下载工具
-            }
+            show: true,
+              feature: {
+                  magicType: {show: true, type: ['line']},restore: {show: true},
+                  saveAsImage: {show: true}
+              }
           },
           //全局字体样式
           // textStyle: {

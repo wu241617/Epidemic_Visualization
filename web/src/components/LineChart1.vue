@@ -90,9 +90,12 @@
 			},
 			//工具框，可以选择
 			toolbox: {
-				feature: {
-					saveAsImage: {} //下载工具
-				}
+				 show: true,
+              feature: {
+                  magicType: {show: true, type: ['bar']},
+                  restore: {show: true}, 
+				  saveAsImage: {show: true}
+              }
 			},
 			xAxis: {
 				// name: '周几',

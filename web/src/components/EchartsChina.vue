@@ -1,19 +1,40 @@
 <template>
   <div class="echarts">
-    <div :style="{height:'550px',width:'100%'}" ref="myEchart"></div>
+    <el-row style="margin-bottom:20px;">
+      <el-button-group>
+        <el-button type="success" @click="viewBar" size="small" icon="el-icon-view">{{title[0]}}</el-button>
+        <el-button type="warning" @click="viewMap" size="small" icon="el-icon-view">{{title[1]}}</el-button>
+        <el-button type="danger" @click="viewTable" size="small" icon="el-icon-view">{{title[2]}}</el-button>
+      </el-button-group>
+    </el-row>
+    <City-Bar v-if="isExit" :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></City-Bar>
+    <div :style="{height:'550px',width:'100%'}" ref="myEchart"  v-show="isExit1"></div>
   </div>
 </template>
 <script>
   import echarts from "echarts";
   import "../../node_modules/echarts/map/js/china.js"
+  import CityBar from '@/components/CityBar.vue'
   import $ from "jquery"
   export default {
     name: "echarts",
     props: ["userJson"],
     data() {
       return {
-        chart: null
+        title:['数据图查看','地图查看','数据表查看'],
+        chart: null,
+        isExit:false,
+        isExit1:true,
+        title2:'国内省份柱状图',
+        tableData:[]
       };
+    },
+    created(){
+          this.axios.get('/countries/CHN').then((res)=>{
+            if(res){
+                this.tableData = res.data
+            }
+        })
     },
     mounted() {
       this.chinaConfigure();
@@ -25,7 +46,25 @@
       this.chart.dispose();
       this.chart = null;
     },
+    components:{
+      CityBar
+    },
     methods: {
+      viewBar(){
+        this.isExit = true
+        this.isExit1 = false
+      },
+      viewMap(){
+        this.isExit = false
+        this.isExit1 = true
+      },
+      viewTable(){
+        this.$router.push('/CHN/provinceAll/dailyNew')
+      },
+       cls1($event){
+         this.isExit = $event
+         this.isExit1 = true
+       },
       chinaConfigure() {
         let myChart = echarts.init(this.$refs.myEchart); //这里是为了获得容器所在位置    
         window.onresize = myChart.resize;

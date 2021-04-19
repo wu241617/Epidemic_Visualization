@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :style="{height:'440px',width:'96%',marginTop:'10px'}" ref="myEchart"></div>
+    <div :style="{height:'440px',width:'97%',marginTop:'30px',marginLeft:'10px'}" ref="myEchart"></div>
   </div>
 </template>
 <script>
@@ -14,19 +14,7 @@
         chart: null,
         text:'国内外数据对比',
         legendData:['国内', '国外'],
-        yAxisData:['累计确诊', '当前确诊', '累计治愈', '累计死亡'],
-        seriesData:[
-        {
-            name: '国内',
-            type: 'bar',
-            data: []
-        },
-        {
-            name: '国外',
-            type: 'bar',
-            data: []
-        }
-    ]
+        yAxisData:['累计确诊', '当前确诊', '累计治愈', '累计死亡']
       };
     },
     mounted() {
@@ -44,7 +32,7 @@
         let myChart = echarts.init(this.$refs.myEchart,"dark"); //这里是为了获得容器所在位置    
         window.onresize = myChart.resize;
         let option = {
-            title: {
+          title: {
                 text: this.text,
                 subtext: '',
                 textStyle: {
@@ -53,39 +41,49 @@
             },
             left: 'left'
             },
-             //工具框，可以选择
-            toolbox: {
+          tooltip: {
+              trigger: 'axis'
+          },
+          legend: {
+              data: this.legendData
+          },
+          toolbox: {
+              show: true,
               feature: {
-                saveAsImage: {} //下载工具
+                  magicType: {show: true, type: ['line']},restore: {show: true},
+                  saveAsImage: {show: true}
               }
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
-            legend: {
-                data: this.legendData
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'value',
-                boundaryGap: [0, 0.01],
-                axisLabel: { interval: 0, rotate: 15 }
-            },
-            yAxis: {
-                type: 'category',
-                data: this.yAxisData
-            },
-            series: this.seriesData
-        };
-
+          },
+          calculable: true,
+          xAxis: [
+              {
+                  type: 'value',
+                  data: this.yAxisData,
+                   axisLabel: {  
+                    interval:0,  
+                    rotate:30  
+                  }  
+              }
+          ],
+          yAxis: [
+              {
+                  type: 'category',
+                  data: this.yAxisData,
+              }
+          ],
+          series: [
+              {
+                  name: '国内',
+                  type: 'bar',
+                  data: []
+              },
+              {
+                  name: '国外',
+                  type: 'bar',
+                  data: []
+              }
+          ]
+};
         $.ajax({
           url:"http://127.0.0.1:3000/api/statistics",
           success:function(data){
@@ -102,7 +100,7 @@
             intArr.push(data[2].deadCount)
             option.series[0].data = domArr
             option.series[1].data = intArr
-             myChart.setOption(option)
+            myChart.setOption(option)
           }
         })
          myChart.setOption(option)

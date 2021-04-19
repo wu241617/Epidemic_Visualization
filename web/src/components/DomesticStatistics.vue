@@ -94,7 +94,7 @@ export default {
 .titleStyle{
     font-size:13.5px;
     color:white;
-    margin:5px 240px 0px 20px;
+    margin:5px 240px 0px 15px;
 }
  .el-button{
     width:50px;

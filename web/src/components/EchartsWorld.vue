@@ -2,9 +2,9 @@
   <div class="echarts">
     <el-row style="margin-bottom:20px;">
       <el-button-group>
-        <el-button type="success" @click="viewBar" size="small" icon="el-icon-view">{{title1[0]}}</el-button>
-        <el-button type="warning" @click="viewMap" size="small" icon="el-icon-view">{{title1[1]}}</el-button>
-        <el-button type="danger" @click="viewTable" size="small" icon="el-icon-view">{{title1[2]}}</el-button>
+        <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data">{{title1[0]}}</el-button>
+        <el-button type="warning" @click="viewMap" size="small" icon="el-icon-location">{{title1[1]}}</el-button>
+        <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title1[2]}}</el-button>
       </el-button-group>
     </el-row>
     <City-Bar v-if="isExit" :tableData="tableData" @event="cls1($event)" :title="title2" :type="'county'"></City-Bar>
@@ -189,3 +189,8 @@
     }
   }
 </script>
+<style lang="css" scoped>
+  /deep/ .el-button:hover{
+    color:blue;
+  }
+</style>

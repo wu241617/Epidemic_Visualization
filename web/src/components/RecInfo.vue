@@ -11,7 +11,7 @@
                     </div>
                      <div>
                          <img :src="item.imgUrl" alt="图片加载失败！">
-                         <el-button @click="view(item.linkUrl)" type="text" style="float: right; margin: 3px 10px" class="window" size="small" icon="el-icon-view" >{{title}}</el-button>
+                         <el-button @click="view(item.linkUrl)" type="text" style="float: right; margin: 3px 10px" class="window" size="small" icon="el-icon-s-promotion" >{{title}}</el-button>
                     </div>
                 </el-card>
             </el-col>
@@ -27,7 +27,7 @@
                     </div>
                      <div>
                          <img :src="item.imgUrl" alt="图片加载失败！">
-                         <el-button @click="view(item.linkUrl)" type="text" style="float: right; margin: 3px 10px" class="window" size="small" icon="el-icon-view" >{{title}}</el-button>
+                         <el-button @click="view(item.linkUrl)" type="text" style="float: right; margin: 3px 10px" class="window" size="small" icon="el-icon-s-promotion" >{{title}}</el-button>
                     </div>
                 </el-card>
             </el-col>

@@ -3,6 +3,9 @@
         <el-row class="tac">
   <el-col>
     <el-menu
+     @open="handleOpen"
+     @close="handleClose"
+      :collapse="isCollapse"
       :default-active="this.currentKey"
       class="el-menu-vertical-demo"
       @select="handleSelect"

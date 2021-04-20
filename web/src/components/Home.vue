@@ -60,7 +60,7 @@ export default {
     text-shadow: black 0.1em 0.1em 0.2em;
     text-align: center;
     height: 100%;
-    width:cacl(100vw-200px);
+    /* width:cacl(100vw-200px); */
     background-color: rgb(84, 92, 100);
     border-right:0.5px solid white;
   }
@@ -74,6 +74,7 @@ export default {
     position: relative;
     background-color:#333;
     overflow: hidden;
+    width:cacl(100vw - 150px);
   }
   
   body > .el-container {

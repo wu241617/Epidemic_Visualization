@@ -30,46 +30,58 @@
             </el-table-column> -->
             <el-table-column
               prop="countryName"
-              label="国家">
+              label="国家"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="countryCode"
-              label="编码">
+              label="编码"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="confirmedCount"
               label="确诊"
-              >
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="confirmedIncr"
               label="新增"
-              >
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="deadCount"
-              label="死亡">
+              label="死亡"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="curedCount"
-              label="治愈">
+              label="治愈"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="continents"
               label="地区"
-              >
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
                   fixed="right"
                   label="操作"
-                  width="200">
+                  width="200"
+                  align="center">
                   <template slot-scope="scope">
                     <el-button-group>
                       <el-tooltip class="item" effect="dark" :content="title1" placement="top-start" >
-                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title1}}</el-button>
+                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-date" class="window">{{title1}}</el-button>
                     </el-tooltip>
                       <el-tooltip class="item" effect="dark" :content="title4" placement="top" style="margin-left:10px;">
-                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title4}}</el-button>
+                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-s-data" class="window">{{title4}}</el-button>
                     </el-tooltip>
                    </el-button-group>
                   </template>
@@ -194,7 +206,26 @@ export default {
   }
 </script>
 
+<style>
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 3px;
+}
+</style>
+
 <style scoped>
+/deep/ .el-table__body-wrapper::-webkit-scrollbar {
+    width: 6px; 
+    height: 6px;
+  }
+  /deep/ .el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
+  }
 .el-table{
     position:relative;
     z-index:1;

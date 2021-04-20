@@ -28,7 +28,7 @@
                     <el-table-column
                     prop="dateId"
                     label="日期"
-                   >
+                   align="center">
                    <template slot-scope="scope">
                         <i class="el-icon-time"></i>
                         <span style="margin-left: 3px">{{ scope.row.dateId }}</span>
@@ -37,33 +37,37 @@
                     <template v-if="GlobalExit">
                          <el-table-column
                     prop="countryName"
-                    label="国家">
+                    label="国家"
+                    align="center">
                      <!-- <template slot-scope="scope">
                         <el-tag size="medium">{{ scope.row.countryName }}</el-tag>
                    </template> -->
                     </el-table-column>
                     <el-table-column
                     prop="countryCode"
-                    label="编码">
+                    label="编码"
+                    align="center">
                     </el-table-column>
                     </template>
                     <template v-if="CHNPrivinceExit">
                          <el-table-column
                     prop="provinceName"
-                    label="省份">
+                    label="省份"
+                    align="center">
                     <!-- <template slot-scope="scope">
                         <el-tag size="medium">{{ scope.row.provinceName }}</el-tag>
                    </template> -->
                     </el-table-column>
                     <el-table-column
                     prop="provinceCode"
-                    label="编码">
+                    label="编码"
+                    align="center">
                     </el-table-column>
                     </template>
                     <el-table-column
                     prop="confirmedCount"
                     label="确诊"
-                    >
+                    align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium">{{ scope.row.confirmedCount }}</el-tag>
                    </template>
@@ -71,21 +75,23 @@
                     <el-table-column
                     prop="confirmedIncr"
                     label="新增"
-                    >
+                    align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium" type="warning">{{ scope.row.confirmedIncr }}</el-tag>
                    </template>
                     </el-table-column>
                     <el-table-column
                     prop="deadCount"
-                    label="死亡">
+                    label="死亡"
+                    align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium" type="danger">{{ scope.row.deadCount }}</el-tag>
                    </template>
                     </el-table-column>
                     <el-table-column
                     prop="curedCount"
-                    label="治愈" >
+                    label="治愈" 
+                    align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium" type="success">{{ scope.row.curedCount }}</el-tag>
                    </template>
@@ -200,7 +206,27 @@ export default {
     }
 }
 </script>
+
+<style>
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 3px;
+}
+</style>
+
 <style scoped>
+/deep/ .el-table__body-wrapper::-webkit-scrollbar {
+    width: 6px; 
+    height: 6px;
+  }
+  /deep/ .el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
+  }
 .el-table{
     margin-top:20px;
 }

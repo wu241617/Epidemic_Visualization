@@ -9,25 +9,31 @@
       <el-table-column
         prop="title"
         label="标题"
+        sortable
        >
       </el-table-column>
       <el-table-column
         prop="pubDateStr"
         label="时间"
-        width="250">
+        sortable
+        width="250"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="infoSource"
         label="数据源"
-        width="250">
+        sortable
+        width="250"
+       align="center" >
         </el-table-column>
         <el-table-column
             fixed="right"
             label="操作"
-            width="150">
+            width="150"
+            align="center">
                   <template slot-scope="scope">
                     <el-tooltip class="item" effect="dark" :content="title" placement="top-start">
-                    <el-button @click="handleClick1(scope.row.sourceUrl)" type="text" size="small" icon="el-icon-view" class="window">{{title}}</el-button>
+                    <el-button @click="handleClick1(scope.row.sourceUrl)" type="text" size="small" icon="el-icon-s-promotion" class="window">{{title}}</el-button>
                     </el-tooltip>
                   </template>
             </el-table-column>

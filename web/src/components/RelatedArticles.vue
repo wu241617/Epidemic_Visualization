@@ -22,17 +22,21 @@
                   fixed
                   prop="title"
                   label="标题"
-                >
+                  sortable
+                 >
                 </el-table-column>
                 <el-table-column
                   prop="mainSummary"
                   label="主要总结"
+                  sortable
                   >
                 </el-table-column>
                 <el-table-column
                   prop="body"
                   label="主体内容"
-                  width="500">
+                  sortable
+                  width="500"
+                  >
                 </el-table-column>
                 <!-- <el-table-column
                   prop="score"
@@ -43,7 +47,8 @@
                 <el-table-column
                   fixed="right"
                   label="操作"
-                  width="90">
+                  width="90"
+                  align="center">
                   <template slot-scope="scope">
                     <el-tooltip class="item" effect="dark" :content="view" placement="top-start">
                     <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view" class="view">{{view}}</el-button>
@@ -87,7 +92,27 @@ export default {
     }
 }
 </script>
+
+<style>
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 3px;
+}
+</style>
+
 <style lang="css" scoped>
+/deep/ .el-table__body-wrapper::-webkit-scrollbar {
+    width: 6px; 
+    height: 6px;
+  }
+  /deep/ .el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
+  }
     .el-table{
     /* background-color:rgba(0,0,0,.4); */
     position:relative;

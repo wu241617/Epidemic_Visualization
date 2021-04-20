@@ -28,41 +28,53 @@
             </el-table-column> -->
             <el-table-column
               prop="cityName"
-              label="城市">
+              label="城市"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="confirmedCount"
               label="确诊"
-              >
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="currentConfirmedCount"
               label="新增"
-              >
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="deadCount"
-              label="死亡">
+              label="死亡"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="curedCount"
-              label="治愈">
+              label="治愈"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="suspectedCount"
-              label="疑似">
+              label="疑似"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
               prop="provinceName"
-              label="省份">
+              label="省份"
+              sortable
+              align="center">
             </el-table-column>
             <el-table-column
                   fixed="right"
                   label="操作"
-                  >
+                  align="center">
                   <template slot-scope="scope">
                     <el-tooltip class="item" effect="dark" :content="title3" placement="top">
-                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-view" class="window">{{title3}}</el-button>
+                    <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-s-data" class="window">{{title3}}</el-button>
                     </el-tooltip>
                   </template>
             </el-table-column>
@@ -172,10 +184,30 @@ export default {
   }
 </script>
 
-<style scoped>
-.el-table{
-    background-color:rgba(0,0,0,.4);
+<style>
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 3px;
+}
+</style>
+
+<style scoped>
+/deep/ .el-table__body-wrapper::-webkit-scrollbar {
+    width: 6px; 
+    height: 6px;
+  }
+  /deep/ .el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
+  }
+.el-table{
+    background-color:white;
+}
+
     .el-table .warning-row {
     background: oldlace;
   }

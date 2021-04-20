@@ -4,9 +4,9 @@
         <el-row>
             <span class="titleStyle">{{title}}</span>
              <el-button-group>
-                <el-button type="success" @click="getGuoNei">{{GlobalType[0]}}</el-button>
-                <el-button type="danger" @click="getGuoJi">{{GlobalType[1]}}</el-button>
-                <el-button type="primary" @click="getQuanQiu">{{GlobalType[2]}}</el-button>
+                <el-button type="success" @click="getGuoNei" size="small" icon="el-icon-caret-right">{{GlobalType[0]}}</el-button>
+                <el-button type="warning" @click="getGuoJi" size="small" icon="el-icon-caret-right">{{GlobalType[1]}}</el-button>
+                <el-button type="danger" @click="getQuanQiu" size="small" icon="el-icon-caret-right">{{GlobalType[2]}}</el-button>
              </el-button-group>
         </el-row>
             <div class="num">
@@ -130,5 +130,8 @@ export default {
 }
 .txt h2{
     margin-top:0;
+}
+.el-button:hover{
+    color:blue;
 }
 </style>

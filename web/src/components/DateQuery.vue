@@ -112,6 +112,8 @@ export default {
     },
     data(){
         return {
+            successMessage1:'数据获取成功！',
+            falieMessage1:'数据获取失败！',
             titleText: '',
             date:'',
             data:[],
@@ -147,6 +149,22 @@ export default {
       closeBtn(){
           this.$emit('event',false)
       },
+       open2(str) {
+        this.$message({
+          showClose: true,
+          message: str,
+          type: 'success',
+          offset:130
+        });
+      },
+      open4(str) {
+        this.$message({
+          showClose: true,
+          message: str,
+          type: 'error',
+          offset:130
+        });
+      },
       format(str){
           let arr = String(str).split(' ')
           let  M = ''
@@ -168,8 +186,10 @@ export default {
       },
       search(){
         if(this.date == ''){
+             this.open4(this.falieMessage1)
             return
         }else{
+            this.open2(this.successMessage1)
             this.data.forEach((item,index) => {
                 if(item.dateId == this.format(this.date)){
                     switch(this.type){

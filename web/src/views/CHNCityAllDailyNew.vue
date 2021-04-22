@@ -111,6 +111,8 @@ export default {
        return {
          successMessage:'条件查询数据成功！',
          falieMessage:'条件查询数据失败！',
+         successMessage1:'数据获取成功！',
+        falieMessage1:'数据获取失败！',
          tableData: [],
          input:'',
          title:'根 据 城 市 名 称 筛 选',
@@ -162,35 +164,38 @@ export default {
         if(this.input && this.input !== ''){
            this.axios.post('/cities/CHN/city',qs.stringify({'cityName':this.input}),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res) => {
           this.tableData = res.data
+          this.total = res.data.length
+          this.pageSize = 5,
+          this.currentPage = 1
            if(res.data && res.data.length !== 0){
-             this.open2()
+             this.open2(this.successMessage)
           }else{
-             this.open4()
+             this.open4(this.falieMessage)
           }
         })
         }else{
            this.axios.get('/cities/CHN').then((res)=>{
               this.tableData = res.data
                if(res.data && res.data.length !== 0){
-             this.open2()
+             this.open2(this.successMessage)
           }else{
-             this.open4()
+             this.open4(this.falieMessage)
           }
         })
         }
       },
-      open2() {
+      open2(str) {
         this.$message({
           showClose: true,
-          message: this.successMessage,
+          message: str,
           type: 'success',
           offset:130
         });
       },
-      open4() {
+      open4(str) {
         this.$message({
           showClose: true,
-          message: this.falieMessage,
+          message: str,
           type: 'error',
           offset:130
         });
@@ -198,10 +203,13 @@ export default {
     },
     created(){
           this.axios.get('/cities/CHN').then((res)=>{
-            if(res){
-                this.tableData = res.data
-                this.total =  res.data.length
-            }    
+            if(res.data && res.data.length !== 0){
+                    this.open2(this.successMessage1)
+                }else{
+                    this.open4(this.falieMessage1)
+                }
+            this.tableData = res.data
+            this.total =  res.data.length
         })
     }
   }

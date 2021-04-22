@@ -33,13 +33,20 @@ import DomesticStatistics from '@/components/screen/DomesticStatistics'
 export default {
     data(){
         return {
-            time: 0
+            time: 0,
+            successMessage:'数据获取成功！',
+            falieMessage:'数据获取失败！'
         }
     },
     created(){
         // 得到服务器端时间
         this.axios.get('/getTime').then((res) => {
             this.time = res.data
+            if(res.data && res.data.length !== 0){
+                this.open2()
+            }else{
+                this.open4()
+            }
         })
     },
     components:{
@@ -49,6 +56,24 @@ export default {
         BarChart1,
         PieChart,
         DomesticStatistics
+    },
+    methods: {
+         open2() {
+        this.$message({
+          showClose: true,
+          message: this.successMessage,
+          type: 'success',
+          offset:130
+        });
+      },
+      open4() {
+        this.$message({
+          showClose: true,
+          message: this.falieMessage,
+          type: 'error',
+          offset:130
+        });
+    }
     }
 }
 </script>

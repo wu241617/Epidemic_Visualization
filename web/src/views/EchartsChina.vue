@@ -28,12 +28,19 @@
         isExit1:true,
         title2:'国内省份柱状图',
         tableData:[],
-        disabled0:false
+        disabled0:false,
+        successMessage:'数据获取成功！',
+        falieMessage:'数据获取失败！'
       };
     },
     created(){
           this.axios.get('/countries/CHN').then((res)=>{
             if(res){
+              if(res.data && res.data.length !== 0){
+                    this.open2()
+                }else{
+                    this.open4()
+                }
                 this.tableData = res.data
             }
         })
@@ -52,6 +59,22 @@
       CityBar
     },
     methods: {
+       open2() {
+        this.$message({
+          showClose: true,
+          message: this.successMessage,
+          type: 'success',
+          offset:130
+        });
+      },
+      open4() {
+        this.$message({
+          showClose: true,
+          message: this.falieMessage,
+          type: 'error',
+          offset:130
+        });
+      },
       viewBar(){
         this.isExit = true
         this.isExit1 = false

@@ -51,7 +51,9 @@
         placeholder: "用户名/电话",
         find: "2", //1显示新增按钮，2显示导入按钮，若不显示这两个按钮可以写0或者不写值
         chart: null,
-        disabled:false
+        disabled:false,
+        successMessage:'数据获取成功！',
+        falieMessage:'数据获取失败！'
       };
     },
     components:{
@@ -59,10 +61,12 @@
     },
     created(){
           this.axios.get('/countries').then((res)=>{
-            if(res){
-               this.tableData = res.data
-            }
-              
+             if(res.data && res.data.length !== 0){
+                    this.open2()
+                }else{
+                    this.open4()
+                }
+            this.tableData = res.data     
         })
     },
     mounted() {
@@ -76,6 +80,22 @@
       this.chart = null;
     },
     methods: {
+        open2() {
+        this.$message({
+          showClose: true,
+          message: this.successMessage,
+          type: 'success',
+          offset:130
+        });
+      },
+      open4() {
+        this.$message({
+          showClose: true,
+          message: this.falieMessage,
+          type: 'error',
+          offset:130
+        });
+      },
       viewBar(){
         this.isExit = true
         this.isExit1 = false

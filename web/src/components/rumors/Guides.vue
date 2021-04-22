@@ -22,7 +22,9 @@ export default {
     data(){
         return {
             guidesArr:[],
-            type:'类型'
+            type:'类型',
+            successMessage:'数据获取成功！',
+            falieMessage:'数据获取失败！'
         }
     },
      created(){
@@ -31,8 +33,31 @@ export default {
           if(res){
                res.data.shift()
                this.guidesArr = res.data
+               if(res.data && res.data.length !== 0){
+                    this.open2()
+                }else{
+                    this.open4()
+                }
           } 
         })
+    },
+    methods: {
+         open2() {
+        this.$message({
+          showClose: true,
+          message: this.successMessage,
+          type: 'success',
+          offset:130
+        });
+      },
+      open4() {
+        this.$message({
+          showClose: true,
+          message: this.falieMessage,
+          type: 'error',
+          offset:130
+        });
+      }
     },
 }
 </script>

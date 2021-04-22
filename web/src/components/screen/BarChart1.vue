@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :style="{height:'440px',width:'97%',marginTop:'30px',marginLeft:'10px'}" ref="myEchart"></div>
+    <div :style="{height:'480px',width:'97%',marginTop:'30px',marginLeft:'10px'}" ref="myEchart"></div>
   </div>
 </template>
 <script>
@@ -62,7 +62,13 @@
                   data: this.yAxisData,
                    axisLabel: {  
                     interval:0,  
-                    rotate:30  
+                    //rotate:30,
+                    formatter: function(value) {
+                      if (value >= 1000) {
+                        value = value / 1000 + 'k';
+                      }
+                      return value;
+                    }
                   }  
               }
           ],

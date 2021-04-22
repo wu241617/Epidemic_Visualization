@@ -112,6 +112,7 @@
        cls1($event){
          this.isExit = $event
          this.isExit1 = true
+         this.disabled = false
        },
       //搜索回调
       searchItem(val) {

@@ -1,17 +1,17 @@
 <template>
-     <el-container>
-    <el-header :style="note">
-      <Header></Header>
-    </el-header>
-    <el-container>
-  <el-aside width="150px" id="aside">
-    <Aside @event1="handle($event)"></Aside>
-  </el-aside>
-  <el-main id="main">
-    <router-view></router-view>
-  </el-main>
-  </el-container>
-</el-container>
+    <el-container id="conatiner">
+        <el-header :style="note">
+          <Header></Header>
+        </el-header>
+        <el-container>
+      <el-aside width="150px" id="aside">
+        <Aside @event1="handle($event)"></Aside>
+      </el-aside>
+      <el-main id="main">
+        <router-view></router-view>
+      </el-main>
+      </el-container>
+    </el-container>
 </template>
 <script>
 import Header from '@/components/common/Header.vue'
@@ -42,14 +42,22 @@ export default {
           $('#main').css('width','calc(100vw - 75px)')
         }
       }
-    }
+    },
+    mounted() {
+      //获取当前窗口文档的高度
+			let docHeight = $(document).height();
+      $('#conatiner').css('height',docHeight+'px')
+			//获取当前窗口文档的宽度
+			let docWidth = $(document).width();
+      $('#conatiner').css('width',docWidth+'px')
+    },
 }
 </script>
 
 <style scoped>
 .el-container{
-    width:100%;
-    height:100%;
+    /* width:1536px;
+    height:721px; */
     font-size:0.75rem;
     font-family: 微软雅黑;
 }

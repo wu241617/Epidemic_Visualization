@@ -6,11 +6,11 @@
             <el-tab-pane label="相关文章" name="first" >
               <Related-Articles></Related-Articles>
             </el-tab-pane>
-            <el-tab-pane label="防疫指南" name="second">
-              <Guides></Guides>
-            </el-tab-pane>
             <el-tab-pane label="推荐信息" name="third" class="third">
               <Rec-Info></Rec-Info>
+            </el-tab-pane>
+            <el-tab-pane label="防疫指南" name="second">
+              <Guides></Guides>
             </el-tab-pane>
             <el-tab-pane label="相关新闻" name="fourth" class="third">
               <Related-News></Related-News>

@@ -91,6 +91,7 @@
        cls1($event){
          this.isExit = $event
          this.isExit1 = true
+         this.disabled = false
        },
       chinaConfigure() {
         let myChart = echarts.init(this.$refs.myEchart); //这里是为了获得容器所在位置    

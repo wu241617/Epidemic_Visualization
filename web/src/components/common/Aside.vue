@@ -120,4 +120,7 @@ export default {
       margin:0;
       padding:0;
     }
+    /deep/ .el-tooltip{
+      background:red;
+    }
 </style>

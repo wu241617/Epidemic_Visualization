@@ -2,42 +2,71 @@
   <div class="echarts">
     <el-row style="margin-bottom:20px;">
       <el-button-group>
-        <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data">{{title[0]}}</el-button>
-        <el-button type="warning" @click="viewMap" size="small" icon="el-icon-location">{{title[1]}}</el-button>
-        <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title[2]}}</el-button>
+        <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled">{{title1[0]}}</el-button>
+        <el-button type="primary" @click="viewMap" size="small" icon="el-icon-location" :disabled="!disabled">{{title1[1]}}</el-button>
+        <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title1[2]}}</el-button>
       </el-button-group>
     </el-row>
-    <City-Bar v-if="isExit" :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></City-Bar>
-    <div :style="{height:'550px',width:'100%'}" ref="myEchart"  v-show="isExit1"></div>
+    <City-Bar v-if="isExit" :tableData="tableData" @event="cls1($event)" :title="title2" :type="'county'"></City-Bar>
+    <div :class="className" :id="id" :style="{height:'550px',width:'100%'}" ref="myEchart1"></div>
   </div>
 </template>
 <script>
   import echarts from "echarts";
-  import "../../node_modules/echarts/map/js/china.js"
+  import '../../node_modules/echarts/map/js/world.js'
   import CityBar from '@/components/CityBar.vue'
   import $ from "jquery"
+  import data  from '@/assets/js/world'
+  
+  let mydata = data.mydata
+
   export default {
     name: "echarts",
-    props: ["userJson"],
+    props: {
+      className: {
+        type: String,
+        default: "yourClassName"
+      },
+      id: {
+        type: String,
+        default: "yourID"
+      },
+      width: {
+        type: String,
+        default: "100%"
+      },
+      height: {
+        type: String,
+        default: "400px"
+      }
+    },
     data() {
       return {
-        title:['数据图查看','地图查看','数据表查看'],
-        chart: null,
+        title1:['数据图查看','地图查看','数据表查看'],
+        title: "图表",
         isExit:false,
         isExit1:true,
-        title2:'国内省份柱状图',
-        tableData:[]
+        tableData:[],
+        title2:'全球各国柱状图',
+        placeholder: "用户名/电话",
+        find: "2", //1显示新增按钮，2显示导入按钮，若不显示这两个按钮可以写0或者不写值
+        chart: null,
+        disabled:false
       };
     },
+    components:{
+      CityBar
+    },
     created(){
-          this.axios.get('/countries/CHN').then((res)=>{
+          this.axios.get('/countries').then((res)=>{
             if(res){
-                this.tableData = res.data
+               this.tableData = res.data
             }
+              
         })
     },
     mounted() {
-      this.chinaConfigure();
+      this.initChart();
     },
     beforeDestroy() {
       if (!this.chart) {
@@ -46,27 +75,38 @@
       this.chart.dispose();
       this.chart = null;
     },
-    components:{
-      CityBar
-    },
     methods: {
       viewBar(){
         this.isExit = true
         this.isExit1 = false
+        this.disabled = true
       },
       viewMap(){
         this.isExit = false
         this.isExit1 = true
+        this.disabled = false
       },
       viewTable(){
-        this.$router.push('/CHN/provinceAll/dailyNew')
+        this.$router.push('/Statistics/globalStatistics')
       },
        cls1($event){
          this.isExit = $event
          this.isExit1 = true
        },
-      chinaConfigure() {
-        let myChart = echarts.init(this.$refs.myEchart); //这里是为了获得容器所在位置    
+      //搜索回调
+      searchItem(val) {
+        //console.log(val)
+      },
+      //新增回调
+      addNew(val) {
+        //console.log(val)
+      },
+      //导入
+      leadingItem(val) {
+        //console.log(val)
+      },
+      initChart() {
+        let myChart = echarts.init(this.$refs.myEchart1);
         window.onresize = myChart.resize;
         let optionMap = {
         title: {
@@ -112,7 +152,7 @@
           series: [{
             name: '累积确诊人数',
             type: 'map',
-            mapType: 'china',
+            mapType: 'world',
             roam: true,
             itemStyle: {
               normal: {
@@ -128,7 +168,7 @@
             },
             label: {
               normal: {
-                show: true, //省份名称
+                show: false, //国家名称
                 fontSize: 12
               },
               emphasis: {
@@ -140,17 +180,11 @@
           }]
         };
         $.ajax({
-          url:"http://127.0.0.1:3000/api/countries/CHN",
+          url:"http://127.0.0.1:3000/api/countries",
           success:function(data){
-             let mydata = []
-             for(let i=0; i<data.length; i++){
-               let obj = {
-                 "name":data[i].provinceName,
-                 "value":Number(data[i].confirmedCount)
-               }
-               mydata.push(obj)
+             for(let i=0; i<mydata.length; i++){
+               mydata[i].value = Number(data[i].confirmedCount)
              }
-             data = JSON.stringify(mydata)
              optionMap.series[0].data = mydata
              myChart.setOption(optionMap)
           }
@@ -160,7 +194,5 @@
   }
 </script>
 <style lang="css" scoped>
-  /deep/ .el-button:hover{
-    color:blue;
-  }
+  
 </style>

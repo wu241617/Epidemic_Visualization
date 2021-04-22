@@ -2,8 +2,8 @@
     <!-- 最新整体统计 -->
     <div>
         <el-card>
-          <el-tag type="danger">{{title}}</el-tag>
-           <el-row>
+           <el-tag type="danger">{{title}}</el-tag>
+          <el-row>
              <el-input
               placeholder="请输入内容"
               prefix-icon="el-icon-search"
@@ -11,18 +11,16 @@
               clearable
               @keydown.enter.native="serach">
             </el-input>
-            <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
-            <el-tag type="warning" style="float:right;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
+             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
+             <el-tag type="warning" style="float:right;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
           </el-row>
-
-           <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
+          <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
           <div class="float" v-if="isExit"></div>
-
-          <el-table
-            :data="tableData"
-              max-height="475"
-              border
-              stripe
+          <el-table  
+            :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+            border
+            stripe
+            max-height="430"
             style="width: 100%"
             :row-class-name="tableRowClassName">
             <!-- <el-table-column
@@ -31,8 +29,14 @@
               width="80">
             </el-table-column> -->
             <el-table-column
-              prop="provinceName"
-              label="省份"
+              prop="countryName"
+              label="国家"
+              sortable
+              align="center">
+            </el-table-column>
+            <el-table-column
+              prop="countryCode"
+              label="编码"
               sortable
               align="center">
             </el-table-column>
@@ -43,7 +47,7 @@
               align="center">
             </el-table-column>
             <el-table-column
-              prop="currentConfirmedCount"
+              prop="confirmedIncr"
               label="新增"
               sortable
               align="center">
@@ -61,22 +65,16 @@
               align="center">
             </el-table-column>
             <el-table-column
-              prop="suspectedCount"
-              label="疑似"
+              prop="continents"
+              label="地区"
               sortable
               align="center">
             </el-table-column>
             <el-table-column
-              prop="provinceCode"
-              label="编码"
-              sortable
-              align="center">
-            </el-table-column>
-             <el-table-column
                   fixed="right"
                   label="操作"
-                 width="200" 
-                 align="center">
+                  width="200"
+                  align="center">
                   <template slot-scope="scope">
                     <el-button-group>
                       <el-tooltip class="item" effect="dark" :content="title1" placement="top-start" >
@@ -89,12 +87,25 @@
                   </template>
             </el-table-column>
           </el-table>
+
+          <el-pagination
+          small
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[5, 10, 30, 50]"
+          :page-size="pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
+        </el-pagination>
+        
         </el-card>
          <div class="container" v-if="isExit1">
-         <City-Bar :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></City-Bar>
+         <City-Bar :tableData="tableData" @event="cls1($event)" :title="title2" :type="'county'"></City-Bar>
         </div>
-        <div class="container1" v-if="isExit2">
-          <City-Bar1 :rowData="rowData1" @event1="cls2($event)" :type="'province'"></City-Bar1>
+         <div class="container1" v-if="isExit2">
+          <City-Bar1 :rowData="rowData1" @event1="cls2($event)" :type="'county'"></City-Bar1>
         </div>
     </div>
 </template>
@@ -105,33 +116,42 @@ import CityBar from '@/components/CityBar.vue'
 import CityBar1 from '@/components/CityBar1.vue'
 
 export default {
-    data() {
-        return {
-          tableData: [],
-          input:'',
-          title:'根 据 省 份 名 称 筛 选',
-          successMessage:'条件查询数据成功！',
-          falieMessage:'条件查询数据失败！',
-          btnText:'查询',
-          isExit1:false,
-          isExit2:false,
-          isExit:false,
-          rowData:{},
-          rowData1:{},
-          title1:'日期查询',
-          title2:'国内省份柱状图',
-          title3:'查看',
-          title4:'柱状图',
-          type:'CHNPrivince'
-        }
+   data() {
+      return {
+        tableData: [],
+        input:'',
+        title:'根 据 国 家 名 称 筛 选',
+        successMessage:'条件查询数据成功！',
+        falieMessage:'条件查询数据失败！',
+        btnText:'查询',
+        isExit:false,
+        isExit1:false,
+        isExit2:false,
+        rowData:{},
+        rowData1:{},
+        title1:'日期查询',
+        title2:'全球各国柱状图',
+        title3:'查看',
+        title4:'柱状图',
+        type:'Global',
+        total:0,
+        pageSize:5,
+        currentPage:1
+      }
     },
-     components:{
+    components:{
       DateQuery,
       CityBar,
       CityBar1
     },
      methods: {
-       cls($event){
+       handleSizeChange(val) {
+         this.pageSize = val
+      },
+      handleCurrentChange(val) {
+         this.currentPage = val
+      },
+      cls($event){
          this.isExit = $event
        },
        cls1($event){
@@ -140,7 +160,7 @@ export default {
        cls2($event){
          this.isExit2 = $event
        },
-       exitView(){
+        exitView(){
          this.isExit1 = true
        },
       tableRowClassName({row, rowIndex}) {
@@ -151,7 +171,7 @@ export default {
         }
         return '';
       },
-       handleClick1(row) {
+      handleClick1(row) {
        this.isExit = true
        this.rowData = row
       },
@@ -161,16 +181,16 @@ export default {
       },
       serach(){
         if(this.input && this.input !== ''){
-           this.axios.post('/countries/CHN/province',qs.stringify({'provinceName':this.input}),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res) => {
+           this.axios.post('/countries/country',qs.stringify({'countryName':this.input}),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res) => {
           this.tableData = res.data
-           if(res.data && res.data.length !== 0){
+          if(res.data && res.data.length !== 0){
              this.open2()
           }else{
              this.open4()
           }
         })
         }else{
-           this.axios.get('/countries/CHN').then((res)=>{
+           this.axios.get('/countries').then((res)=>{
               this.tableData = res.data
                if(res.data && res.data.length !== 0){
              this.open2()
@@ -198,10 +218,12 @@ export default {
       }
     },
     created(){
-          this.axios.get('/countries/CHN').then((res)=>{
+          this.axios.get('/countries').then((res)=>{
             if(res){
-                this.tableData = res.data
+               this.tableData = res.data
+               this.total =  res.data.length
             }
+              
         })
     }
   }
@@ -219,8 +241,7 @@ export default {
 </style>
 
 <style scoped>
-  
-  /deep/ .el-table__body-wrapper::-webkit-scrollbar {
+/deep/ .el-table__body-wrapper::-webkit-scrollbar {
     width: 6px; 
     height: 6px;
   }
@@ -228,9 +249,8 @@ export default {
     background-color: #ddd;
     border-radius: 3px;
   }
-
 .el-table{
-     position:relative;
+    position:relative;
     z-index:1;
 }
 .window:hover{
@@ -252,7 +272,7 @@ export default {
   .el-table .success-row {
     background: #f0f9eb;
   }
-   .el-input{
+  .el-input{
     width:200px;
     height:30px;
     margin-bottom:20px;
@@ -263,6 +283,7 @@ export default {
     padding:0;
     margin-left:20px;
     margin-bottom:20px;
+    font-size:13px;
   }
   /deep/ .el-input--prefix .el-input__inner {
     height: 30px;
@@ -290,5 +311,10 @@ export default {
     top:25%;
     left:25%;
     z-index:1000;
+  }
+  .el-pagination{
+    margin-top:20px;
+    display: flex;
+    justify-content: center;
   }
 </style>>

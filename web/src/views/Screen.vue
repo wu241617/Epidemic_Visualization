@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import BarChart1 from '@/components/BarChart1'
-import LineChart from '@/components/LineChart.vue'
-import LineChart1 from '@/components/LineChart1.vue'
-import BarChart from '@/components/BarChart'
-import PieChart from '@/components/PieChart'
-import DomesticStatistics from '@/components/DomesticStatistics'
+import BarChart1 from '@/components/screen/BarChart1'
+import LineChart from '@/components/screen/LineChart.vue'
+import LineChart1 from '@/components/screen/LineChart1.vue'
+import BarChart from '@/components/screen/BarChart'
+import PieChart from '@/components/screen/PieChart'
+import DomesticStatistics from '@/components/screen/DomesticStatistics'
 
 export default {
     data(){

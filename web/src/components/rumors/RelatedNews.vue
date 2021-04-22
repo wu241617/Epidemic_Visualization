@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <el-table
-      :data="newsArr"
+      :data="newsArr.slice((currentPage-1)*pageSize,currentPage*pageSize)"
        border
        stripe
-       max-height="475"
+       height="450"
       style="width: 100%">
       <el-table-column
         prop="title"
@@ -38,6 +38,19 @@
                   </template>
             </el-table-column>
     </el-table>
+
+    <el-pagination
+        small
+        background
+        @size-change="handleSizeChange"
+         @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-sizes="[2, 4, 10, 20]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+    </el-pagination>
+
     </div>
 </template>
 <script>
@@ -45,7 +58,10 @@ export default {
     data(){
         return {
             newsArr:[],
-            title:'查看详情'
+            title:'查看详情',
+             total:0,
+            pageSize:4,
+            currentPage:1
         }
     },
      created(){
@@ -53,10 +69,17 @@ export default {
         this.axios.get('/statistics/timelines').then((res) => {
           if(res){
                this.newsArr = res.data.reverse()
+               this.total =  res.data.length
           } 
         })
     },
     methods: {
+        handleSizeChange(val) {
+         this.pageSize = val
+      },
+      handleCurrentChange(val) {
+         this.currentPage = val
+      },
         view(url){
             window.open(url)
         }
@@ -78,4 +101,10 @@ export default {
   .window:hover{
   color:red;
 }
+.el-pagination{
+    margin-top:20px;
+    margin-bottom:10px;
+    display: flex;
+    justify-content: center;
+  }
 </style>

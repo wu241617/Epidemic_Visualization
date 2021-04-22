@@ -15,9 +15,9 @@
               <div class="float" v-if="isExit"></div>
 
               <el-table
-                :data="rumorsArr"
+                :data="rumorsArr.slice((currentPage-1)*pageSize,currentPage*pageSize)"
                 border
-                style="width: 100%" max-height="550">
+                style="width: 100%" height="480">
                 <el-table-column
                   fixed
                   prop="title"
@@ -56,6 +56,17 @@
                   </template>
                 </el-table-column>
               </el-table>
+              <el-pagination
+                  small
+                  background
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[2, 4, 10, 20]"
+                  :page-size="pageSize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="total">
+                </el-pagination>
     </div>
 </template>
 <script>
@@ -68,16 +79,26 @@ export default {
         mainBody:'文章内容',
         view:'内容查看',
         closeTitle:'关闭浮层',
-        title1:'文章标题'
+        title1:'文章标题',
+        total:0,
+        pageSize:4,
+        currentPage:1
       };
     },
     created(){
          // rumors 数据
         this.axios.get('/statistics/rumors').then((res) => {
             this.rumorsArr = res.data
+            this.total =  res.data.length
         })
     },
     methods: {
+       handleSizeChange(val) {
+         this.pageSize = val
+      },
+      handleCurrentChange(val) {
+         this.currentPage = val
+      },
       handleClick(tab, event) {
         console.log(tab, event);
       },
@@ -182,5 +203,11 @@ color:red;
     letter-spacing:2px;
     line-height:25px;
     text-indent:2em;
+  }
+   .el-pagination{
+    margin-top:20px;
+    margin-bottom:10px;
+    display: flex;
+    justify-content: center;
   }
 </style>

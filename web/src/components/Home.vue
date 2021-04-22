@@ -4,18 +4,19 @@
       <Header></Header>
     </el-header>
     <el-container>
-  <el-aside width="150px">
-    <Aside></Aside>
+  <el-aside width="150px" id="aside">
+    <Aside @event1="handle($event)"></Aside>
   </el-aside>
-  <el-main>
+  <el-main id="main">
     <router-view></router-view>
   </el-main>
   </el-container>
 </el-container>
 </template>
 <script>
-import Header from '@/components/Header.vue'
-import Aside from '@/components/Aside.vue'
+import Header from '@/components/common/Header.vue'
+import Aside from '@/components/common/Aside.vue'
+import $ from 'jquery'
 
 export default {
     data(){
@@ -30,6 +31,17 @@ export default {
     components:{
       Header,
       Aside
+    },
+    methods:{
+      handle($event){
+        if($event == 'open'){
+          $('#aside').css('width','150px')
+          $('#main').css('width','calc(100vw - 150px)')
+        }else{
+          $('#aside').css('width','75px')
+          $('#main').css('width','calc(100vw - 75px)')
+        }
+      }
     }
 }
 </script>
@@ -63,6 +75,7 @@ export default {
     /* width:cacl(100vw-200px); */
     background-color: rgb(84, 92, 100);
     border-right:0.5px solid white;
+    overflow-x:hidden;
   }
   .el-aside ul{
     border:none;

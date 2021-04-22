@@ -1,12 +1,14 @@
 <template>
     <div class="body1">
+      <el-button-group class="menu">
+        <el-button type="primary"  size="small" icon="el-icon-s-unfold" @click="open" :disabled="isClose">展开</el-button>
+        <el-button type="primary"  size="small" icon="el-icon-s-fold" @click="close" v-if="isClose">收起</el-button>
+      </el-button-group>
         <el-row class="tac">
   <el-col>
     <el-menu
-     @open="handleOpen"
-     @close="handleClose"
       :collapse="isCollapse"
-      :default-active="this.currentKey"
+      :default-active="this.$route.path"
       class="el-menu-vertical-demo"
       @select="handleSelect"
       background-color="#545c64"
@@ -51,7 +53,9 @@ export default {
     data(){
         return {
             itemArr:this.$store.state.itemArr,
-            currentKey: ''
+            currentKey: '',
+            isCollapse:false,
+            isClose:true
         }
     },
     mounted(){
@@ -67,6 +71,16 @@ export default {
       window.name = "";
     },
     methods: {
+      open(){
+        this.isCollapse = false
+        this.isClose = true
+        this.$emit('event1','open')
+      },
+      close(){
+        this.isCollapse = true
+        this.isClose = false
+        this.$emit('event1','close')
+      },
       handleSelect(key, keyPath) {
         this.$router.push(key)
       },
@@ -89,8 +103,21 @@ export default {
         height:100%;
         color: #333;
         text-align: center;
+        position: relative;
     }
     .body1 ul{
         border:none;
+    }
+    .menu{
+      background:#409EFF;
+      display: flex !important;
+    }
+    .menu /deep/ .el-button{
+      width:75px;
+      height:30px;
+      border-radius: 0;
+      border:0;
+      margin:0;
+      padding:0;
     }
 </style>

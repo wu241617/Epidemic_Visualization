@@ -16,7 +16,6 @@
 </template>
 <script>
 import echarts from "echarts";
-import $ from "jquery"
 
 export default {
     props:{

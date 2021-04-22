@@ -6,6 +6,7 @@
 <script>
   import echarts from "echarts";
   import $ from "jquery"
+  
   export default {
     name: "LineChart1",
     props: ["userJson"],

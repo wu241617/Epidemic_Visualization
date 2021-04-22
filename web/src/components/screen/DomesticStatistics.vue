@@ -4,9 +4,9 @@
         <el-row>
             <span class="titleStyle">{{title}}</span>
              <el-button-group>
-                <el-button type="success" @click="getGuoNei" size="small" icon="el-icon-caret-right">{{GlobalType[0]}}</el-button>
-                <el-button type="warning" @click="getGuoJi" size="small" icon="el-icon-caret-right">{{GlobalType[1]}}</el-button>
-                <el-button type="danger" @click="getQuanQiu" size="small" icon="el-icon-caret-right">{{GlobalType[2]}}</el-button>
+                <el-button type="success" @click="getGuoNei" size="small" :disabled="isDisabled0">{{GlobalType[0]}}</el-button>
+                <el-button type="warning" @click="getGuoJi" size="small" :disabled="isDisabled1">{{GlobalType[1]}}</el-button>
+                <el-button type="danger" @click="getQuanQiu" size="small" :disabled="isDisabled2">{{GlobalType[2]}}</el-button>
              </el-button-group>
         </el-row>
             <div class="num">
@@ -42,7 +42,10 @@ export default {
             title:'国内最新统计数据',
             numArr: this.$store.state.ShowTitle,
             numData:[],
-            GlobalType: this.$store.state.GlobalType
+            GlobalType: this.$store.state.GlobalType,
+            isDisabled0:true,
+            isDisabled1:false,
+            isDisabled2:false
         }
     },
      created(){
@@ -58,6 +61,9 @@ export default {
     methods:{
         getGuoNei(){
              this.title = '国内最新统计数据'
+             this.isDisabled0 = true
+             this.isDisabled1 = false
+             this.isDisabled2 = false
              this.numArr[0].num = this.numData[1].confirmedCount
              this.numArr[1].num = this.numData[1].currentConfirmedCount
              this.numArr[2].num = this.numData[1].curedCount
@@ -65,6 +71,9 @@ export default {
         },
         getGuoJi(){
              this.title = '国际最新统计数据'
+             this.isDisabled0 = false
+             this.isDisabled1 = true
+             this.isDisabled2 = false
              this.numArr[0].num = this.numData[2].confirmedCount
              this.numArr[1].num = this.numData[2].currentConfirmedCount
              this.numArr[2].num = this.numData[2].curedCount
@@ -72,6 +81,9 @@ export default {
         },
         getQuanQiu(){
              this.title = '全球最新统计数据'
+             this.isDisabled0 = false
+             this.isDisabled1 = false
+             this.isDisabled2 = true
              this.numArr[0].num = this.numData[0].confirmedCount
              this.numArr[1].num = this.numData[0].currentConfirmedCount
              this.numArr[2].num = this.numData[0].curedCount
@@ -130,8 +142,5 @@ export default {
 }
 .txt h2{
     margin-top:0;
-}
-.el-button:hover{
-    color:blue;
 }
 </style>

@@ -20,10 +20,10 @@
   </div>
 </template>
 <script>
-import RelatedArticles from '@/components/RelatedArticles.vue'
-import RecInfo from '@/components/RecInfo.vue'
-import Guides from '@/components/Guides.vue'
-import RelatedNews from '@/components/RelatedNews.vue'
+import RelatedArticles from '@/components/rumors/RelatedArticles.vue'
+import RecInfo from '@/components/rumors/RecInfo.vue'
+import Guides from '@/components/rumors/Guides.vue'
+import RelatedNews from '@/components/rumors/RelatedNews.vue'
 
 export default {
     data() {

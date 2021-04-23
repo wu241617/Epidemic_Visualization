@@ -16,7 +16,7 @@
           </el-row>
 
            <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
-          <div class="float" v-if="isExit"></div>
+          <div class="float" v-if="isFloat"></div>
 
           <el-table
             :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
@@ -128,9 +128,10 @@ export default {
           successMessage1:'数据获取成功！',
           falieMessage1:'数据获取失败！',
           btnText:'查询',
+          isExit:false,
           isExit1:false,
           isExit2:false,
-          isExit:false,
+          isFloat:false,
           rowData:{},
           rowData1:{},
           title1:'日期查询',
@@ -139,7 +140,7 @@ export default {
           title4:'柱状图',
           type:'CHNPrivince',
           total:0,
-          pageSize:5,
+          pageSize:10,
           currentPage:1
         }
     },
@@ -157,15 +158,19 @@ export default {
       },
        cls($event){
          this.isExit = $event
+         this.isFloat = false
        },
        cls1($event){
          this.isExit1 = $event
+         this.isFloat = false
        },
        cls2($event){
          this.isExit2 = $event
+         this.isFloat = false
        },
        exitView(){
          this.isExit1 = true
+         this.isFloat = true
        },
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
@@ -177,10 +182,12 @@ export default {
       },
        handleClick1(row) {
        this.isExit = true
+       this.isFloat = true
        this.rowData = row
       },
       handleClick2(row) {
        this.isExit2 = true
+       this.isFloat = true
        this.rowData1 = row
       },
       serach(){

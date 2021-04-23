@@ -14,6 +14,9 @@
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
             <el-tag type="warning" style="float:right;">{{title1}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title2}}</el-button></el-tag>
           </el-row>
+
+          <div class="float" v-if="isFloat"></div>
+
           <el-table
             :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
             border
@@ -124,8 +127,9 @@ export default {
          title3:'柱状图',
          rowData:{},
          total:0,
-         pageSize:5,
-         currentPage:1
+         pageSize:10,
+         currentPage:1,
+         isFloat:false
        }
      },
      components:{
@@ -142,15 +146,19 @@ export default {
       handleClick1(row) {
        this.isExit1 = true
        this.rowData = row
+       this.isFloat = true
       },
        cls($event){
          this.isExit = $event
+         this.isFloat = false
        },
         cls1($event){
          this.isExit1 = $event
+         this.isFloat = false
        },
        exitView(){
          this.isExit = true
+         this.isFloat = true
        },
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
@@ -299,4 +307,13 @@ export default {
     display: flex;
     justify-content: center;
   }
+  .float{
+   width:100%;
+   height:100%;
+   background-color:rgba(0,0,0,.3);
+   position:absolute;
+   top:0;
+   left:0;
+   z-index:99;
+ }
 </style>>

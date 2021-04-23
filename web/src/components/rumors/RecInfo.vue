@@ -1,23 +1,7 @@
 <template>
     <div>
-        <el-row>
-            <div v-for="item in recArr" :key="item.id">
-            <el-col :span="6">
-                <el-card  class="rec" shadow>
-                    <div slot="header" class="clearfix">
-                        <el-tooltip class="item" effect="dark" :content="item.title" placement="top-start">
-                            <el-tag class="text main" type="info">{{item.title}}</el-tag>
-                        </el-tooltip>
-                    </div>
-                     <div>
-                         <img :src="item.imgUrl" alt="图片加载失败！">
-                         <el-button @click="view(item.linkUrl)" type="text" style="float: right; margin: 3px 10px" class="window" size="small" icon="el-icon-s-promotion" >{{title}}</el-button>
-                    </div>
-                </el-card>
-            </el-col>
-        </div>
-
-        <div v-for="item in wikisArr" :key="item.id">
+            <el-row>
+            <div v-for="item in data" :key="item.id">
             <el-col :span="6">
                 <el-card  class="rec" shadow>
                     <div slot="header" class="clearfix">
@@ -39,8 +23,9 @@
 export default {
     data(){
         return {
-            recArr:[],
-            wikisArr:[],
+            //recArr:[],
+           // wikisArr:[],
+            data:[],
             title:'查看详情',
             successMessage:'数据获取成功！',
             falieMessage:'数据获取失败！'
@@ -48,24 +33,36 @@ export default {
     },
      created(){
        // 获得推荐数据
-        this.axios.get('/statistics/recommends').then((res) => {
+         this.axios.get('/statistics/wikis').then((res) => {
           if(res){
-               this.recArr = res.data
-          }
-          if(res.data && res.data.length !== 0){
+               res.data.shift()
+               this.data =  this.formatData(res.data)
+               if(res.data && res.data.length !== 0){
                     this.open2()
                 }else{
                     this.open4()
                 } 
-        })
-         this.axios.get('/statistics/wikis').then((res) => {
-          if(res){
-               res.data.shift()
-               this.wikisArr = res.data
           } 
+        })
+        this.axios.get('/statistics/recommends').then((res) => {
+          if(res){
+               this.data = this.data.concat(this.formatData(res.data))
+          }
         })
     },
     methods: {
+        formatData(arr){
+            let newArr = []
+            arr.forEach((item,index) => {
+                let obj = {
+                    title:item.title,
+                    imgUrl:item.imgUrl,
+                    linkUrl:item.linkUrl
+                }
+                newArr.push(obj)
+            })
+            return newArr
+        },
         view(url){
             window.open(url)
         },

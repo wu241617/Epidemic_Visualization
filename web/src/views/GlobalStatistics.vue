@@ -15,7 +15,7 @@
              <el-tag type="warning" style="float:right;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
           </el-row>
           <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
-          <div class="float" v-if="isExit"></div>
+          <div class="float" v-if="isFloat"></div>
           <el-table  
             :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
             border
@@ -129,6 +129,7 @@ export default {
         isExit:false,
         isExit1:false,
         isExit2:false,
+        isFloat:false,
         rowData:{},
         rowData1:{},
         title1:'日期查询',
@@ -137,7 +138,7 @@ export default {
         title4:'柱状图',
         type:'Global',
         total:0,
-        pageSize:5,
+        pageSize:10,
         currentPage:1
       }
     },
@@ -155,15 +156,19 @@ export default {
       },
       cls($event){
          this.isExit = $event
+         this.isFloat = false
        },
        cls1($event){
          this.isExit1 = $event
+         this.isFloat = false
        },
        cls2($event){
          this.isExit2 = $event
+         this.isFloat = false
        },
         exitView(){
          this.isExit1 = true
+         this.isFloat = true
        },
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
@@ -176,10 +181,12 @@ export default {
       handleClick1(row) {
        this.isExit = true
        this.rowData = row
+       this.isFloat = true
       },
       handleClick2(row) {
        this.isExit2 = true
        this.rowData1 = row
+       this.isFloat = true
       },
       serach(){
         if(this.input && this.input !== ''){

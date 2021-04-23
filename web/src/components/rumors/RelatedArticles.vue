@@ -62,7 +62,7 @@
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"
                   :current-page="currentPage"
-                  :page-sizes="[2, 4, 10, 20]"
+                  :page-sizes="[2, 4, 6, 8]"
                   :page-size="pageSize"
                   layout="total, sizes, prev, pager, next, jumper"
                   :total="total">
@@ -81,7 +81,7 @@ export default {
         closeTitle:'关闭浮层',
         title1:'文章标题',
         total:0,
-        pageSize:4,
+        pageSize:6,
         currentPage:1,
         successMessage:'数据获取成功！',
         falieMessage:'数据获取失败！'
@@ -170,7 +170,7 @@ color:red;
 .float{
    width:100%;
    height:100%;
-   background-color:rgba(0,0,0,.1);
+   background-color:rgba(196, 193, 193, 0.3) !important;
    position:absolute;
    top:0;
    left:0;

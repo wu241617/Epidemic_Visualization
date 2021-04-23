@@ -82,7 +82,9 @@ export default {
         title1:'文章标题',
         total:0,
         pageSize:4,
-        currentPage:1
+        currentPage:1,
+        successMessage:'数据获取成功！',
+        falieMessage:'数据获取失败！'
       };
     },
     created(){
@@ -90,6 +92,11 @@ export default {
         this.axios.get('/statistics/rumors').then((res) => {
             this.rumorsArr = res.data
             this.total =  res.data.length
+            if(res.data && res.data.length !== 0){
+                    this.open2()
+                }else{
+                    this.open4()
+                }
         })
     },
     methods: {
@@ -109,6 +116,24 @@ export default {
       },
       closeBtn(){
           this.isExit = false
+      },
+        open2() {
+        this.$message({
+          showClose: true,
+          message: this.successMessage,
+          type: 'success',
+          offset:130,
+           duration:1500
+        });
+      },
+      open4() {
+        this.$message({
+          showClose: true,
+          message: this.falieMessage,
+          type: 'error',
+          offset:130,
+           duration:1500
+        });
       }
     }
 }

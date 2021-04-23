@@ -47,7 +47,8 @@ export default {
           showClose: true,
           message: this.successMessage,
           type: 'success',
-          offset:130
+          offset:130,
+           duration:1500
         });
       },
       open4() {
@@ -55,7 +56,8 @@ export default {
           showClose: true,
           message: this.falieMessage,
           type: 'error',
-          offset:130
+          offset:130,
+           duration:1500
         });
       }
     },

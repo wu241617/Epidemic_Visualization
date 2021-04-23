@@ -212,7 +212,8 @@ export default {
           showClose: true,
           message: str,
           type: 'success',
-          offset:130
+          offset:130,
+           duration:1500
         });
       },
       open4(str) {
@@ -220,7 +221,8 @@ export default {
           showClose: true,
           message: str,
           type: 'error',
-          offset:130
+          offset:130,
+           duration:1500
         });
       }
     },

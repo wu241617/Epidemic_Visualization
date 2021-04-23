@@ -41,7 +41,9 @@ export default {
         return {
             recArr:[],
             wikisArr:[],
-            title:'查看详情'
+            title:'查看详情',
+            successMessage:'数据获取成功！',
+            falieMessage:'数据获取失败！'
         }
     },
      created(){
@@ -49,7 +51,12 @@ export default {
         this.axios.get('/statistics/recommends').then((res) => {
           if(res){
                this.recArr = res.data
-          } 
+          }
+          if(res.data && res.data.length !== 0){
+                    this.open2()
+                }else{
+                    this.open4()
+                } 
         })
          this.axios.get('/statistics/wikis').then((res) => {
           if(res){
@@ -61,7 +68,25 @@ export default {
     methods: {
         view(url){
             window.open(url)
-        }
+        },
+          open2() {
+        this.$message({
+          showClose: true,
+          message: this.successMessage,
+          type: 'success',
+          offset:130,
+           duration:1500
+        });
+      },
+      open4() {
+        this.$message({
+          showClose: true,
+          message: this.falieMessage,
+          type: 'error',
+          offset:130,
+           duration:1500
+        });
+      }
     },  
 }
 </script>

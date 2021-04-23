@@ -3,17 +3,17 @@
   <div>
     <el-card ref="dom">
         <el-tabs v-model="activeName" @tab-click="handleClick" >
-            <el-tab-pane label="相关文章" name="first" >
-              <Related-Articles></Related-Articles>
+            <el-tab-pane label="相关文章" name="first">
+              <Related-Articles v-if="activeName === 'first'"></Related-Articles>
             </el-tab-pane>
             <el-tab-pane label="推荐信息" name="third" class="third">
-              <Rec-Info></Rec-Info>
+              <Rec-Info v-if="activeName === 'third'"></Rec-Info>
             </el-tab-pane>
             <el-tab-pane label="防疫指南" name="second">
-              <Guides></Guides>
+              <Guides v-if="activeName === 'second'"></Guides>
             </el-tab-pane>
-            <el-tab-pane label="相关新闻" name="fourth" class="third">
-              <Related-News></Related-News>
+            <el-tab-pane label="相关新闻" name="fourth" class="third" >
+              <Related-News v-if="activeName === 'fourth'"></Related-News>
             </el-tab-pane>
       </el-tabs>
    </el-card>

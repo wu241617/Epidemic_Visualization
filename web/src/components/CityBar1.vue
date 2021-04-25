@@ -36,6 +36,7 @@
 </template>
 <script>
 import echarts from "echarts";
+import qs from 'qs'
 
 export default {
     props:{
@@ -59,7 +60,34 @@ export default {
             closeTitle:'关闭浮层',
             cityType:false,
             provinceType:false,
-            countyType:false
+            countyType:false,
+            data:[],
+            legendData:['确诊', '疑似', '治愈','死亡'],
+            seriesData:[{
+                name: '确诊',
+                data: [],
+                type: 'line',
+                smooth: true
+              },
+              {
+                name: '疑似',
+                data: [],
+                type: 'line',
+                smooth: true
+              },
+              {
+                name: '治愈',
+                data: [],
+                type: 'line',
+                smooth: true
+              },	
+              {
+                name: '死亡',
+                data: [],
+                type: 'line',
+                smooth: true
+              }
+            ]
         }
     },
     methods: {
@@ -69,18 +97,7 @@ export default {
         chinaConfigure() {
         let myChart = echarts.init(this.$refs.myEchart,"dark"); //这里是为了获得容器所在位置    
         window.onresize = myChart.resize;
-        let charTitle = ''
-        switch(this.type){
-          case 'city':
-            charTitle = `${this.title1}柱状图（最新统计）`
-            break;
-          case 'province':
-            charTitle = `${this.title3}柱状图（最新统计）`
-            break;
-          case 'county':
-            charTitle = `${this.title10}柱状图（最新统计）`
-            break;
-        } 
+        let charTitle = `${this.title1}柱状图（最新统计）`
         let option_right1 = {
           title: {
             text: charTitle,
@@ -90,13 +107,6 @@ export default {
             },
             left: 'center'
           },
-          // grid: {
-          // 	left: 50,
-          // 	top: 50,
-          // 	right: 0,
-          // 	width: '87%',
-          // 	height: 320,
-          // },
           color: ['#3398DB'],
           tooltip: {
             trigger: 'axis',
@@ -112,21 +122,12 @@ export default {
                   saveAsImage: {show: true}
               }
           },
-          //全局字体样式
-          // textStyle: {
-          // 	fontFamily: 'PingFangSC-Medium',
-          // 	fontSize: 12,
-          // 	color: '#858E96',
-          // 	lineHeight: 12
-          // },
           xAxis: {
             type: 'category',
-            // scale:true,
             data: []
           },
           yAxis: {
             type: 'value',
-            //坐标轴刻度设置
             },
           series: [{
             type: 'bar',
@@ -143,21 +144,140 @@ export default {
         option_right1.xAxis.data = ['确诊','疑似','治愈','死亡','新增']
         option_right1.series[0].data = dataArr
         myChart.setOption(option_right1)
-      }
+      },
+       chinaConfigure1() {
+        let myChart = echarts.init(this.$refs.myEchart,"dark"); //这里是为了获得容器所在位置    
+        window.onresize = myChart.resize;
+        let charTitle = ''
+        switch(this.type){
+          case 'province':
+            charTitle = `${this.title3}折线图`
+            break;
+          case 'county':
+            charTitle = `${this.title10}折线图`
+            break;
+        } 
+        let option_left2 = {
+          title: {
+				text: charTitle,
+				textStyle: {
+					fontSize: 13,
+					color:'white'
+				},
+				left: 'left'
+			},
+			legend: {
+        orient: 'horizontal', 
+				data: this.legendData,
+        x: 'center'
+				//left: '100'
+			},
+			grid: {
+				top: 50, 
+				left: '4%',
+				right: '6%',
+				bottom: '4%',
+				containLabel: true
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'line',
+					lineStyle: {
+						color: '#7171C6'
+					}
+				}
+			},
+			toolbox: {
+				show: true,
+          feature: {
+              magicType: {show: true, type: ['bar']},
+              restore: {show: true},
+              saveAsImage: {show: true}
+        }
+			},
+			xAxis: {
+				type: 'category',
+				axisLabel: {
+					interval: 1
+				},
+				data: []
+			},
+			yAxis: {
+				type: 'value',
+				axisLine: {
+					show: true
+				},
+				axisLabel: {
+					show: true,
+					color: 'white',
+					fontSize: 12,
+					formatter: function(value) {
+						if (value >= 1000) {
+							value = value / 1000 + 'k';
+						}
+						return value;
+					}
+				},
+				splitLine: {
+					show: true,
+					lineStyle: {
+						color: '#172738',
+						width: 1,
+						type: 'solid'
+					}
+				}
+			},
+			series:this.seriesData
+      };
+        let newData = []
+			  for(let i=0; i<this.data.length; i++){
+				  if(this.data[i].dateId == 20200201 || this.data[i].dateId == 20200301 || this.data[i].dateId == 20200401 || this.data[i].dateId == 20200501 || this.data[i].dateId == 20200601 || this.data[i].dateId == 20200701 || this.data[i].dateId == 20200801 || this.data[i].dateId == 20200901 || this.data[i].dateId == 20201001 || this.data[i].dateId == 20201101 || this.data[i].dateId == 20201201 || this.data[i].dateId == 20210101){
+					  newData.push(this.data[i])
+				  }
+			  }
+			let xData = []
+			let series1 = []
+			let series2 = []
+			let series3 = []
+			let series4 = []
+			for(let i=0; i<newData.length; i++){
+				xData.push(newData[i].dateId)
+				series1.push(newData[i].confirmedCount)
+				series2.push(newData[i].suspectedCount)
+				series3.push(newData[i].curedCount)
+				series4.push(newData[i].deadCount)
+			}
+			option_left2.xAxis.data = ['20-02','20-03','20-04','20-05','20-06','20-07','20-08','20-09','20-10','20-11','20-12','21-01']
+       option_left2.series[0].data = series1
+			 option_left2.series[1].data = series2
+			 option_left2.series[2].data = series3
+			 option_left2.series[3].data = series4
+       myChart.setOption(option_left2)
+      },
+       request(url,obj){
+            this.axios.post(url,qs.stringify(obj),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res)=>{
+            this.data = res.data
+            this.chinaConfigure1();
+        })
+        }
     },
     mounted() {
       switch(this.type){
         case 'city':
           this.cityType = true
+          this.chinaConfigure();
           break;
         case 'county':
+           this.request('/countries/daily/country',{'countryName':this.rowData.countryName})
           this.countyType = true
           break;
         case 'province':
+          console.log('this.rowData.provinceName',this.rowData.provinceName)
+           this.request('/provinces/CHN/daily/province',{'provinceName':this.rowData.provinceName})
           this.provinceType = true
           break;
       }
-      this.chinaConfigure();
     },
     beforeDestroy() {
       if (!this.chart) {

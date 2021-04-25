@@ -12,9 +12,13 @@
                      <div class="block">
                         <el-date-picker
                         v-model="date"
-                        type="date"
-                        placeholder="选择日期"
-                        >
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        unlink-panels
+                        :clearable="false"
+                        :picker-options="pickerOptions">
                         </el-date-picker>
                         <el-button type="primary" @click="search">{{title1}}</el-button>
                     </div>
@@ -22,7 +26,7 @@
                     :data="tableData"
                     border
                     stripe
-                    max-height="475"
+                    max-height="250"
                     style="width: 100%"
                     :row-class-name="tableRowClassName">
                     <el-table-column
@@ -115,15 +119,20 @@ export default {
             successMessage1:'数据获取成功！',
             falieMessage1:'数据获取失败！',
             titleText: '',
-            date:'',
+            date:[],
             data:[],
             dateObj:this.$store.state.dateObj,
             tableData:[],
             title1:'查询',
-            title2:'数据支持查询范围：（2020-02 至 2021-01）',
+            title2:'数据支持查询范围：（2020-02 至 2021-02）',
             GlobalExit:false,
             CHNPrivinceExit:false,
-            closeTitle:'关闭浮层'
+            closeTitle:'关闭浮层',
+            pickerOptions: {
+                disabledDate: time => {
+                return this.dealDisabledDate(time);
+                }
+            }
         }
     },
     mounted(){
@@ -141,6 +150,14 @@ export default {
         }
     },
     methods:{
+        dealDisabledDate(time) {
+            let selectStartDate = 'Sat Feb 01 2020 00:00:00 GMT+0800 (中国标准时间)'
+            let selectEndDate = 'Mon Feb 22 2021 00:00:00 GMT+0800 (中国标准时间)'
+            return (
+                time.getTime() < new Date(selectStartDate).getTime() ||
+                time.getTime() > new Date(selectEndDate).getTime()
+            );
+        },
         request(url,obj){
             this.axios.post(url,qs.stringify(obj),{headers: {'Content-Type':'application/x-www-form-urlencoded'}}).then((res)=>{
             this.data = res.data
@@ -165,6 +182,14 @@ export default {
           offset:130
         });
       },
+       open1() {
+        this.$message({
+          showClose: true,
+          message: '数据查询不在日期范围内，请重新选择日期！',
+          type: 'error',
+          offset:130
+        });
+      },
       format(str){
           let arr = String(str).split(' ')
           let  M = ''
@@ -185,43 +210,56 @@ export default {
         return '';
       },
       search(){
-        if(this.date == ''){
+        if(this.date.length == 0){
+            this.tableData = []
              this.open4(this.falieMessage1)
             return
         }else{
-            this.open2(this.successMessage1)
+            let arr = []
             this.data.forEach((item,index) => {
-                if(item.dateId == this.format(this.date)){
-                    switch(this.type){
-                        case 'Global':
-                            let obj = {
-                                countryName: item.countryName,
-                                dateId:item.dateId,
-                                countryCode:item.countryCode,
-                                confirmedCount:item.confirmedCount,
-                                confirmedIncr:item.confirmedIncr,
-                                deadCount:item.deadCount,
-                                curedCount:item.curedCount
-                            }
-                            this.tableData = []
-                            this.tableData.push(obj)
-                            break;
-                        case 'CHNPrivince':
-                            let obj1 = {
-                                provinceName: item.provinceName,
-                                dateId:item.dateId,
-                                provinceCode:item.provinceCode,
-                                confirmedCount:item.confirmedCount,
-                                confirmedIncr:item.confirmedIncr,
-                                deadCount:item.deadCount,
-                                curedCount:item.curedCount
-                            }
-                            this.tableData = []
-                            this.tableData.push(obj1)
-                            break;
-                    }
+                if(item.dateId == this.format(this.date[0])){
+                    arr.push(index)
+                }
+                if(item.dateId == this.format(this.date[1])){
+                    arr.push(index)
                 }
             })
+            if(arr.length != 2){
+                this.open1()
+            }else{
+                this.open2(this.successMessage1)
+            }
+            this.tableData = []
+            switch(this.type){
+                case 'Global':
+                    for(let i = arr[0]; i<=arr[1]; i++){
+                        let obj = {
+                            countryName: this.data[i].countryName,
+                            dateId: this.data[i].dateId,
+                            countryCode: this.data[i].countryCode,
+                            confirmedCount: this.data[i].confirmedCount,
+                            confirmedIncr: this.data[i].confirmedIncr,
+                            deadCount: this.data[i].deadCount,
+                            curedCount: this.data[i].curedCount
+                        }
+                        this.tableData.push(obj)
+                    }
+                    break;
+                case 'CHNPrivince':
+                    for(let i = arr[0]; i<=arr[1]; i++){
+                        let obj1 = {
+                            provinceName: this.data[i].provinceName,
+                            dateId:this.data[i].dateId,
+                            provinceCode:this.data[i].provinceCode,
+                            confirmedCount:this.data[i].confirmedCount,
+                            confirmedIncr:this.data[i].confirmedIncr,
+                            deadCount:this.data[i].deadCount,
+                            curedCount:this.data[i].curedCount
+                        }
+                        this.tableData.push(obj1)
+                    }
+                    break;
+            }
         }
       }
     }

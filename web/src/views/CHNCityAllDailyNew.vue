@@ -184,6 +184,9 @@ export default {
         }else{
            this.axios.get('/cities/CHN').then((res)=>{
               this.tableData = res.data
+              this.total = res.data.length
+              this.pageSize = 5,
+              this.currentPage = 1
                if(res.data && res.data.length !== 0){
              this.open2(this.successMessage)
           }else{

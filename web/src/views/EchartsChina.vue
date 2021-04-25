@@ -2,19 +2,22 @@
   <div class="echarts">
     <el-row style="margin-bottom:20px;">
       <el-button-group>
-        <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled">{{title[0]}}</el-button>
-        <el-button type="primary" @click="viewMap" size="small" icon="el-icon-location" :disabled="!disabled">{{title[1]}}</el-button>
+        <el-button type="primary" @click="viewMap" size="small" icon="el-icon-location" :disabled="disabled3">{{title[1]}}</el-button>
+        <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled1">{{title[0]}}</el-button>
+        <el-button type="warning" @click="viewPie" size="small" icon="el-icon-s-help" :disabled="disabled2">{{title[3]}}</el-button>
         <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title[2]}}</el-button>
       </el-button-group>
     </el-row>
-    <City-Bar v-if="isExit" :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></City-Bar>
+    <Bar-All v-if="isExit" :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></Bar-All>
+    <Pie-All v-if="isExit2" :tableData="tableData" @event="cls2($event)" :title="title2" :type="'province'"></Pie-All>
     <div :style="{height:'550px',width:'100%'}" ref="myEchart"  v-show="isExit1"></div>
   </div>
 </template>
 <script>
   import echarts from "echarts";
   import "../../node_modules/echarts/map/js/china.js"
-  import CityBar from '@/components/CityBar.vue'
+  import BarAll from '@/components/BarAll.vue'
+  import PieAll from '@/components/PieAll.vue'
   import $ from "jquery"
   
   export default {
@@ -22,13 +25,16 @@
     props: ["userJson"],
     data() {
       return {
-        title:['数据图查看','地图查看','数据表查看'],
+        title:['数据柱状图查看','地图查看','数据表查看','数据饼状图查看'],
         chart: null,
         isExit:false,
         isExit1:true,
+        isExit2:false,
         title2:'国内省份柱状图',
         tableData:[],
-        disabled0:false,
+        disabled1:false,
+        disabled2:false,
+        disabled3:true,
         successMessage:'数据获取成功！',
         falieMessage:'数据获取失败！'
       };
@@ -56,7 +62,8 @@
       this.chart = null;
     },
     components:{
-      CityBar
+      BarAll,
+      PieAll
     },
     methods: {
        open2() {
@@ -80,12 +87,27 @@
       viewBar(){
         this.isExit = true
         this.isExit1 = false
-        this.disabled = true
+        this.disabled1 = true
+        this.disabled2 = false
+        this.disabled3 = false
+        this.isExit2 = false
+      },
+      viewPie(){
+        this.isExit = false
+        this.isExit1 = false
+        this.disabled1 = false
+        this.disabled2 = true
+        this.disabled3 = false
+        this.isExit2 = true
       },
       viewMap(){
         this.isExit = false
         this.isExit1 = true
         this.disabled = false
+        this.isExit2 = false
+        this.disabled1 = false
+        this.disabled2 = false
+        this.disabled3 = true
       },
       viewTable(){
         this.$router.push('/CHN/provinceAll/dailyNew')
@@ -93,7 +115,18 @@
        cls1($event){
          this.isExit = $event
          this.isExit1 = true
-         this.disabled = false
+         this.disabled1 = false
+        this.disabled2 = false
+        this.disabled3 = true
+          this.isExit2 = false
+       },
+       cls2($event){
+         this.isExit = $event
+         this.isExit1 = true
+         this.disabled1 = false
+        this.disabled2 = false
+        this.disabled3 = true
+        this.isExit2 = false
        },
       chinaConfigure() {
         let myChart = echarts.init(this.$refs.myEchart); //这里是为了获得容器所在位置    

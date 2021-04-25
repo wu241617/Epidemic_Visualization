@@ -106,7 +106,6 @@
                  }
                objArr.push(obj)
              }
-             console.log('objArr',objArr)
              option.series[0].data = objArr
              myChart.setOption(option)
           }

@@ -13,6 +13,17 @@
             </el-input>
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
             <el-tag type="warning" style="float:right;">{{title1}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title2}}</el-button></el-tag>
+            <div style="float:right;display:flex;margin-right:50px;">
+              <el-select v-model="value" filterable placeholder="请选择省份" size="small" style="width:100px;">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+             <el-tag type="success">{{title5}}<el-button type="text" style="float:right;" size="small" icon="el-icon-view" class="window" @click="exitView1">{{title2}}</el-button></el-tag>
+            </div>
           </el-row>
 
           <div class="float" v-if="isFloat"></div>
@@ -97,17 +108,21 @@
 
         </el-card>
         <div class="container" v-if="isExit">
-          <City-Bar :tableData="tableData" @event="cls($event)" :title="title1" :type="'city'"></City-Bar>
+          <Bar-All :tableData="tableData" @event="cls($event)" :title="title1" :type="'city'" ></Bar-All>
+        </div>
+        <div class="container" v-if="isExit2">
+         <Pie-All :tableData="tableData" @event="cls2($event)" :title="title5" :type="'city'" :provinceName="value"></Pie-All>
         </div>
         <div class="container1" v-if="isExit1">
-          <City-Bar1 :rowData="rowData" @event1="cls1($event)" :type="'city'"></City-Bar1>
+          <Bar-Item :rowData="rowData" @event1="cls1($event)" :type="'city'"></Bar-Item>
         </div>
     </div>
 </template>
 <script>
 import qs from 'qs'
-import CityBar from '@/components/CityBar.vue'
-import CityBar1 from '@/components/CityBar1.vue'
+import BarAll from '@/components/BarAll.vue'
+import PieAll from '@/components/PieAll.vue'
+import BarItem from '@/components/BarItem.vue'
 
 export default {
      data(){
@@ -115,26 +130,133 @@ export default {
          successMessage:'条件查询数据成功！',
          falieMessage:'条件查询数据失败！',
          successMessage1:'数据获取成功！',
-        falieMessage1:'数据获取失败！',
+         falieMessage1:'数据获取失败！',
          tableData: [],
          input:'',
          title:'根 据 城 市 名 称 筛 选',
          btnText:'查询',
          isExit:false,
          isExit1:false,
+         isExit2:false,
          title1:'国内城市柱状图',
+         title5:'国内城市饼状图',
          title2:'查看',
          title3:'柱状图',
          rowData:{},
          total:0,
          pageSize:10,
          currentPage:1,
-         isFloat:false
+         isFloat:false,
+         options: [{
+          value: '安徽',
+          label: '安徽'
+        }, {
+          value: '澳门',
+          label: '澳门'
+        }, {
+          value: '北京',
+          label: '北京'
+        }, {
+          value: '重庆',
+          label: '重庆'
+        }, {
+          value: '福建',
+          label: '福建'
+        },{
+          value: '广东',
+          label: '广东'
+        }, {
+          value: '甘肃',
+          label: '甘肃'
+        }, {
+          value: '广西',
+          label: '广西'
+        }, {
+          value: '贵州',
+          label: '贵州'
+        }, {
+          value: '湖北',
+          label: '湖北'
+        },{
+          value: '河北',
+          label: '河北'
+        }, {
+          value: '黑龙江',
+          label: '黑龙江'
+        }, {
+          value: '湖南',
+          label: '湖南'
+        }, {
+          value: '河南',
+          label: '河南'
+        }, {
+          value: '海南',
+          label: '海南'
+        },{
+          value: '吉林',
+          label: '吉林'
+        }, {
+          value: '江苏',
+          label: '江苏'
+        }, {
+          value: '江西',
+          label: '江西'
+        }, {
+          value: '辽宁',
+          label: '辽宁'
+        }, {
+          value: '内蒙古',
+          label: '内蒙古'
+        },{
+          value: '宁夏',
+          label: '宁夏'
+        }, {
+          value: '青海',
+          label: '青海'
+        }, {
+          value: '四川',
+          label: '四川'
+        }, {
+          value: '山东',
+          label: '山东'
+        }, {
+          value: '上海',
+          label: '上海'
+        },{
+          value: '陕西',
+          label: '陕西'
+        }, {
+          value: '山西',
+          label: '山西'
+        }, {
+          value: '天津',
+          label: '天津'
+        }, {
+          value: '台湾',
+          label: '台湾'
+        }, {
+          value: '香港',
+          label: '香港'
+        },{
+          value: '新疆',
+          label: '新疆'
+        }, {
+          value: '西藏',
+          label: '西藏'
+        }, {
+          value: '云南',
+          label: '云南'
+        }, {
+          value: '浙江',
+          label: '浙江'
+        }],
+        value: '湖北'
        }
      },
      components:{
-       CityBar,
-       CityBar1
+       BarAll,
+       BarItem,
+       PieAll
      },
      methods: {
       handleSizeChange(val) {
@@ -156,8 +278,18 @@ export default {
          this.isExit1 = $event
          this.isFloat = false
        },
+       cls2($event){
+         this.isExit2 = $event
+         this.isFloat = false
+       },
        exitView(){
          this.isExit = true
+         this.isExit2 = false
+         this.isFloat = true
+       },
+        exitView1(){
+         this.isExit2 = true
+         this.isExit = false
          this.isFloat = true
        },
       tableRowClassName({row, rowIndex}) {

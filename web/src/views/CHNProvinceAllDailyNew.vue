@@ -12,7 +12,8 @@
               @keydown.enter.native="serach">
             </el-input>
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
-            <el-tag type="warning" style="float:right;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
+            <el-tag type="warning" style="float:right;margin-left:50px;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
+            <el-tag type="success" style="float:right;">{{title5}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView1">{{title3}}</el-button></el-tag>
           </el-row>
 
            <Date-Query v-if="isExit" :isExit="isExit" @event="cls($event)" :rowData="rowData" :type="type"></Date-Query>
@@ -104,18 +105,22 @@
 
         </el-card>
          <div class="container" v-if="isExit1">
-         <City-Bar :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></City-Bar>
+         <Bar-All :tableData="tableData" @event="cls1($event)" :title="title2" :type="'province'"></Bar-All>
+        </div>
+        <div class="container" v-if="isExit3">
+         <Pie-All :tableData="tableData" @event="cls3($event)" :title="title5" :type="'province'"></Pie-All>
         </div>
         <div class="container1" v-if="isExit2">
-          <City-Bar1 :rowData="rowData1" @event1="cls2($event)" :type="'province'"></City-Bar1>
+          <Bar-Item :rowData="rowData1" @event1="cls2($event)" :type="'province'"></Bar-Item>
         </div>
     </div>
 </template>
 <script>
 import qs from 'qs'
 import DateQuery from '@/components/DateQuery.vue'
-import CityBar from '@/components/CityBar.vue'
-import CityBar1 from '@/components/CityBar1.vue'
+import BarAll from '@/components/BarAll.vue'
+import PieAll from '@/components/PieAll.vue'
+import BarItem from '@/components/BarItem.vue'
 
 export default {
     data() {
@@ -131,11 +136,13 @@ export default {
           isExit:false,
           isExit1:false,
           isExit2:false,
+          isExit3:false,
           isFloat:false,
           rowData:{},
           rowData1:{},
           title1:'日期查询',
           title2:'国内省份柱状图',
+          title5:'国内省份饼状图',
           title3:'查看',
           title4:'折线图',
           type:'CHNPrivince',
@@ -146,8 +153,9 @@ export default {
     },
      components:{
       DateQuery,
-      CityBar,
-      CityBar1
+      BarAll,
+      BarItem,
+      PieAll
     },
      methods: {
         handleSizeChange(val) {
@@ -168,8 +176,18 @@ export default {
          this.isExit2 = $event
          this.isFloat = false
        },
+       cls3($event){
+         this.isExit3 = $event
+         this.isFloat = false
+       },
        exitView(){
          this.isExit1 = true
+         this.isExit3 = false
+         this.isFloat = true
+       },
+       exitView1(){
+         this.isExit3 = true
+         this.isExit1 = false
          this.isFloat = true
        },
       tableRowClassName({row, rowIndex}) {

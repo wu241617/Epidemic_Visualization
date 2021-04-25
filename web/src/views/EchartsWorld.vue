@@ -6,9 +6,9 @@
         <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled2">{{title1[0]}}</el-button>
         <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title1[2]}}</el-button>
       </el-button-group>
-      <el-col :span="5">
+      <el-col :span="4" style="float:right;">
         <div style="display:flex;">
-              <el-select v-model="value" filterable placeholder="请选择区域" size="small" style="width:100px;margin-left:20px;background:#E6A23C;" :disabled="disabled3">
+              <el-select v-model="value" filterable placeholder="请选择区域" size="small" style="width:100px;margin-right:5px;background:#E6A23C;" :disabled="disabled3">
               <el-option
                 v-for="item in options"
                 :key="item.value"

@@ -39,13 +39,6 @@
             },
             left: 'center'
           },
-          // grid: {
-          // 	left: 50,
-          // 	top: 50,
-          // 	right: 0,
-          // 	width: '87%',
-          // 	height: 320,
-          // },
           color: ['#3398DB'],
           tooltip: {
             trigger: 'axis',
@@ -53,7 +46,6 @@
               type: 'shadow'
             }
           },
-          //工具框，可以选择
           toolbox: {
            show: true,
               feature: {
@@ -62,21 +54,12 @@
                   saveAsImage: {show: true}
               }
           },
-          //全局字体样式
-          // textStyle: {
-          // 	fontFamily: 'PingFangSC-Medium',
-          // 	fontSize: 12,
-          // 	color: '#858E96',
-          // 	lineHeight: 12
-          // },
           xAxis: {
             type: 'category',
-            // scale:true,
             data: []
           },
           yAxis: {
             type: 'value',
-            //坐标轴刻度设置
             },
           series: [{
             type: 'bar',

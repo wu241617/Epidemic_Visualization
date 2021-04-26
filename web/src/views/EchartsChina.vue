@@ -3,7 +3,7 @@
     <el-row style="margin-bottom:20px;">
       <el-button-group>
         <el-button type="primary" @click="viewMap" size="small" icon="el-icon-location" :disabled="disabled3">{{title[1]}}</el-button>
-        <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled1">{{title[0]}}</el-button>
+        <!-- <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled1">{{title[0]}}</el-button> -->
         <el-button type="warning" @click="viewPie" size="small" icon="el-icon-s-help" :disabled="disabled2">{{title[3]}}</el-button>
         <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title[2]}}</el-button>
       </el-button-group>
@@ -25,7 +25,7 @@
     props: ["userJson"],
     data() {
       return {
-        title:['数据柱状图查看','地图查看','数据表查看','数据饼状图查看'],
+        title:['数据柱状图查看','全国各省地图模式','全国各省数据表格模式','全国各省图形模式'],
         chart: null,
         isExit:false,
         isExit1:true,

@@ -12,7 +12,7 @@
               @keydown.enter.native="serach">
             </el-input>
             <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
-            <el-tag type="warning" style="float:right;margin-left:50px;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag>
+            <!-- <el-tag type="warning" style="float:right;margin-left:50px;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag> -->
             <el-tag type="success" style="float:right;">{{title5}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView1">{{title3}}</el-button></el-tag>
           </el-row>
 
@@ -84,7 +84,7 @@
                     <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-date" class="window">{{title1}}</el-button>
                     </el-tooltip>
                       <el-tooltip class="item" effect="dark" :content="title4" placement="top" style="margin-left:10px;">
-                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-s-marketing" class="window">{{title4}}</el-button>
+                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-s-data" class="window">{{title4}}</el-button>
                     </el-tooltip>
                    </el-button-group>
                   </template>
@@ -142,9 +142,9 @@ export default {
           rowData1:{},
           title1:'日期查询',
           title2:'国内省份柱状图',
-          title5:'国内省份饼状图',
+          title5:'全国各省图形模式',
           title3:'查看',
-          title4:'折线图',
+          title4:'省份图',
           type:'CHNPrivince',
           total:0,
           pageSize:10,

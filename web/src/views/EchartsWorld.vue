@@ -6,9 +6,9 @@
         <el-button type="success" @click="viewBar" size="small" icon="el-icon-s-data" :disabled="disabled2">{{title1[0]}}</el-button>
         <el-button type="danger" @click="viewTable" size="small" icon="el-icon-s-marketing">{{title1[2]}}</el-button>
       </el-button-group>
-      <el-col :span="4" style="float:right;">
+      <el-col :span="5">
         <div style="display:flex;">
-              <el-select v-model="value" filterable placeholder="请选择区域" size="small" style="width:100px;margin-right:5px;background:#E6A23C;" :disabled="disabled3">
+              <el-select v-model="value" filterable placeholder="请选择区域" size="small" style="width:100px;margin:0 5px 0 20px;background:#E6A23C;" :disabled="disabled3">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -58,7 +58,7 @@
     },
     data() {
       return {
-        title1:['数据柱状图查看','地图查看','数据表查看'],
+        title1:['全球各国图形模式','全球各国地图模式','全球各国表格模式'],
         title: "图表",
         isExit:false,
         isExit1:true,
@@ -73,7 +73,7 @@
         disabled3:false,
         successMessage:'数据获取成功！',
         falieMessage:'数据获取失败！',
-        title5:'数据饼状图查看',
+        title5:'区域各国图形模式',
         title3:'查看',
         options:[{
            value: '亚洲',

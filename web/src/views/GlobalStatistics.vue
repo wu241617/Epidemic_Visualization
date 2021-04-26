@@ -92,7 +92,7 @@
                     <el-button @click="handleClick1(scope.row)" type="text" size="small" icon="el-icon-date" class="window">{{title1}}</el-button>
                     </el-tooltip>
                       <el-tooltip class="item" effect="dark" :content="title4" placement="top" style="margin-left:10px;">
-                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-s-marketing" class="window">{{title4}}</el-button>
+                    <el-button @click="handleClick2(scope.row)" type="text" size="small" icon="el-icon-s-data" class="window">{{title4}}</el-button>
                     </el-tooltip>
                    </el-button-group>
                   </template>
@@ -149,10 +149,10 @@ export default {
         rowData:{},
         rowData1:{},
         title1:'日期查询',
-        title2:'全球各国柱状图',
-        title5:'全球区域各国家饼状图',
+        title2:'全球各国图形模式',
+        title5:'区域各国图形模式',
         title3:'查看',
-        title4:'折线图',
+        title4:'国家图',
         type:'Global',
         total:0,
         pageSize:10,

@@ -13,6 +13,7 @@ Vue.use(ElementUI);
 import axios from 'axios'
 // 配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:3000/api'
+    //axios.defaults.baseURL = 'http://123.57.46.110:8900/api'
 
 // 设置请求超时
 axios.defaults.timeout = 15000;

@@ -21,7 +21,7 @@
 export default {
     data(){
         return {
-            guidesArr:[],
+            guidesArr:[{contentImgUrls:'https://img1.dxycdn.com/2020/0225/169/3398653034208226202-135.png',title:'口罩指南'},{contentImgUrls:'https://img1.dxycdn.com/2020/0215/703/3396784974690083861-135.png',title:'洗手液指南'},{contentImgUrls:'https://img1.dxycdn.com/2020/0215/743/3396785021934726693-135.png',title:'温度计指南'}],
             type:'类型',
             successMessage:'数据获取成功！',
             falieMessage:'数据获取失败！'
@@ -29,17 +29,15 @@ export default {
     },
      created(){
          // 获得指南
-        this.axios.get('/statistics/goodsGuides').then((res) => {
-          if(res){
-               res.data.shift()
-               this.guidesArr = res.data
-               if(res.data && res.data.length !== 0){
-                    this.open2()
-                }else{
-                    this.open4()
-                }
-          } 
-        })
+        // this.axios.get('/statistics/goodsGuides').then((res) => {
+        //   if(res){
+        //        this.open2()
+        //        res.data.shift()
+        //        this.guidesArr = res.data
+        //   }else{
+        //        this.open4()
+        //   } 
+        // })
     },
     methods: {
          open2() {

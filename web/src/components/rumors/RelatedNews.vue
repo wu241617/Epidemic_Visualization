@@ -81,6 +81,9 @@ export default {
         })
     },
     methods: {
+      handleClick1(url){
+        window.open(url)
+      },
         handleSizeChange(val) {
          this.pageSize = val
       },

@@ -91,7 +91,7 @@ export default {
             },
             series: [
                 {
-                    name: '确诊人数',
+                    name: '累计确诊人数',
                     type: 'pie',
                     radius: '50%',
                     data: [],
@@ -138,6 +138,7 @@ export default {
             type: 'value',
             },
           series: [{
+            name: '累计确诊人数',
             type: 'bar',
             data: [],
             barMaxWidth: "50%"
@@ -154,7 +155,7 @@ export default {
 				left: 'left'
 			},
 			legend: {
-				data: ['确诊', '疑似', '治愈','死亡'],
+				data: ['累计确诊', '当前新增', '累计治愈','累计死亡'],
 				left: 'center'
 			},
 			// grid: {
@@ -214,25 +215,25 @@ export default {
 				}
 			},
 			series:[{
-                name: '确诊',
+                name: '累计确诊',
                 data: [],
                 type: 'line',
                 smooth: true
               },
               {
-                name: '疑似',
+                name: '当前新增',
                 data: [],
                 type: 'line',
                 smooth: true
               },
               {
-                name: '治愈',
+                name: '累计治愈',
                 data: [],
                 type: 'line',
                 smooth: true
               },	
               {
-                name: '死亡',
+                name: '累计死亡',
                 data: [],
                 type: 'line',
                 smooth: true
@@ -253,7 +254,7 @@ export default {
                 objArr.push(obj)
                 }
            }
-            option.title.text = `${this.provinceName} 各城市饼状图`
+            option.title.text = `${this.provinceName} 各城市饼状图（累计确诊）`
             option.series[0].data = objArr
             myChart.setOption(option)
             // 渲染柱状图
@@ -263,7 +264,7 @@ export default {
                 xData1.push(objArr[i].name)
                 myChart1SData1.push(objArr[i].value)
             }
-             option1.title.text = `${this.provinceName} 各城市柱状图`
+             option1.title.text = `${this.provinceName} 各城市柱状图（累计确诊）`
              option1.xAxis.data = xData1
              option1.series[0].data = myChart1SData1
              myChart1.setOption(option1)
@@ -277,7 +278,7 @@ export default {
               if(this.tableData[i].provinceName == this.provinceName){
                 xLineData.push(this.tableData[i].cityName)
                 Lines1.push(this.tableData[i].confirmedCount)
-                Lines2.push(this.tableData[i].suspectedCount)
+                Lines2.push(this.tableData[i].currentConfirmedCount)
                 Lines3.push(this.tableData[i].curedCount)
                 Lines4.push(this.tableData[i].deadCount)
               }
@@ -299,7 +300,7 @@ export default {
                  }
                 objArr.push(obj)
             }
-            option.title.text = `国内各省份饼状图`
+            option.title.text = `国内各省份饼状图（累计确诊）`
             option.series[0].data = objArr
             myChart.setOption(option)
             // 渲染柱状图
@@ -309,7 +310,7 @@ export default {
                 xData.push(objArr[i].name)
                 myChart1SData.push(objArr[i].value)
             }
-             option1.title.text = `国内各省份柱状图`
+             option1.title.text = `国内各省份柱状图（累计确诊）`
              option1.xAxis.data = xData
              option1.series[0].data = myChart1SData
              myChart1.setOption(option1)
@@ -322,7 +323,7 @@ export default {
             for(let i=0; i<this.tableData.length; i++){
                 xLineData1.push(this.tableData[i].provinceName)
                 ser1.push(this.tableData[i].confirmedCount)
-                ser2.push(this.tableData[i].suspectedCount)
+                ser2.push(this.tableData[i].currentConfirmedCount)
                 ser3.push(this.tableData[i].curedCount)
                 ser4.push(this.tableData[i].deadCount)
             }
@@ -345,7 +346,7 @@ export default {
                 objArr.push(obj)
                 }
             }
-            option.title.text = `${this.area} 区域各国饼状图`
+            option.title.text = `${this.area} 区域各国饼状图（累计确诊）`
             option.series[0].data = objArr
             myChart.setOption(option)
              // 渲染柱状图
@@ -355,7 +356,7 @@ export default {
                 xData2.push(objArr[i].name)
                 myChart1SData2.push(objArr[i].value)
             }
-             option1.title.text = `${this.area} 区域各国柱状图`
+             option1.title.text = `${this.area} 区域各国柱状图（累计确诊）`
              option1.xAxis.data = xData2
              option1.series[0].data = myChart1SData2
              myChart1.setOption(option1)
@@ -369,7 +370,7 @@ export default {
               if(this.tableData[i].continents == this.area){
                 xLineData2.push(this.tableData[i].countryName)
                 series1.push(this.tableData[i].confirmedCount)
-                series2.push(this.tableData[i].suspectedCount)
+                series2.push(this.tableData[i].currentConfirmedCount)
                 series3.push(this.tableData[i].curedCount)
                 series4.push(this.tableData[i].deadCount)
               }

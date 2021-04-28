@@ -286,7 +286,8 @@
           }]
         };
         $.ajax({
-          url:"http://127.0.0.1:3000/api/countries",
+          //url:"http://127.0.0.1:3000/api/countries",
+           url:"http://123.57.46.110:8900/api/countries",
           success:function(data){
              for(let i=0; i<mydata.length; i++){
                mydata[i].value = Number(data[i].confirmedCount)

@@ -62,27 +62,27 @@ export default {
             provinceType:false,
             countyType:false,
             data:[],
-            legendData:['确诊', '疑似', '治愈','死亡'],
+            legendData:['累计确诊', '当前确诊', '累计治愈','累计死亡'],
             seriesData:[{
-                name: '确诊',
+                name: '累计确诊',
                 data: [],
                 type: 'line',
                 smooth: true
               },
               {
-                name: '疑似',
+                name: '当前确诊',
                 data: [],
                 type: 'line',
                 smooth: true
               },
               {
-                name: '治愈',
+                name: '累计治愈',
                 data: [],
                 type: 'line',
                 smooth: true
               },	
               {
-                name: '死亡',
+                name: '累计死亡',
                 data: [],
                 type: 'line',
                 smooth: true
@@ -231,11 +231,28 @@ export default {
 			series:this.seriesData
       };
         let newData = []
-			  for(let i=0; i<this.data.length; i++){
+        switch(this.type){
+        case 'city':
+          this.cityType = true
+          this.chinaConfigure();
+          break;
+        case 'county':
+            for(let i=0; i<this.data.length; i++){
 				  if(this.data[i].dateId == 20200201 || this.data[i].dateId == 20200301 || this.data[i].dateId == 20200401 || this.data[i].dateId == 20200501 || this.data[i].dateId == 20200601 || this.data[i].dateId == 20200701 || this.data[i].dateId == 20200801 || this.data[i].dateId == 20200901 || this.data[i].dateId == 20201001 || this.data[i].dateId == 20201101 || this.data[i].dateId == 20201201 || this.data[i].dateId == 20210101){
 					  newData.push(this.data[i])
 				  }
 			  }
+        	option_left2.xAxis.data = ['20-02','20-03','20-04','20-05','20-06','20-07','20-08','20-09','20-10','20-11','20-12','21-01']
+          break;
+        case 'province':
+           for(let i=0; i<this.data.length; i++){
+				  if(this.data[i].dateId == 20200201 || this.data[i].dateId == 20200301 || this.data[i].dateId == 20200401 || this.data[i].dateId == 20200501 || this.data[i].dateId == 20200601 || this.data[i].dateId == 20200701 || this.data[i].dateId == 20200801 || this.data[i].dateId == 20200901 || this.data[i].dateId == 20201001 || this.data[i].dateId == 20201101 || this.data[i].dateId == 20201201 || this.data[i].dateId == 20210101 || this.data[i].dateId == 20210201 || this.data[i].dateId == 20210301 || this.data[i].dateId == 20210401 || this.data[i].dateId == 20210501){
+					  newData.push(this.data[i])
+				  }
+			  }
+        	option_left2.xAxis.data = ['20-02','20-03','20-04','20-05','20-06','20-07','20-08','20-09','20-10','20-11','20-12','21-01','21-02','21-03','21-04','21-05']
+          break;
+      }
 			let xData = []
 			let series1 = []
 			let series2 = []
@@ -244,11 +261,10 @@ export default {
 			for(let i=0; i<newData.length; i++){
 				xData.push(newData[i].dateId)
 				series1.push(newData[i].confirmedCount)
-				series2.push(newData[i].suspectedCount)
+				series2.push(newData[i].currentConfirmedCount)
 				series3.push(newData[i].curedCount)
 				series4.push(newData[i].deadCount)
 			}
-			option_left2.xAxis.data = ['20-02','20-03','20-04','20-05','20-06','20-07','20-08','20-09','20-10','20-11','20-12','21-01']
        option_left2.series[0].data = series1
 			 option_left2.series[1].data = series2
 			 option_left2.series[2].data = series3

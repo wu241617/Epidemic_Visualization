@@ -164,7 +164,8 @@
       		// color: ['#00EE00', '#FF9F7F', '#FFD700']
       	};
         $.ajax({
-          url:"http://127.0.0.1:3000/api/countries/daily/country/CHN",
+          //url:"http://127.0.0.1:3000/api/countries/daily/country/CHN",
+		  url:"http://123.57.46.110:8900/api/countries/daily/country/CHN",
           success:function(data){
 			  let newData = []
 			  for(let i=0; i<data.length; i++){

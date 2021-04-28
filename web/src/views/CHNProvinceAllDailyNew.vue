@@ -3,6 +3,7 @@
     <div>
         <el-card>
           <el-tag type="danger">{{title}}</el-tag>
+          <el-tag type="warning">{{title6}}</el-tag>
            <el-row>
              <el-input
               placeholder="请输入内容"
@@ -39,31 +40,31 @@
             </el-table-column>
             <el-table-column
               prop="confirmedCount"
-              label="确诊"
+              label="累计确诊"
               sortable
               align="center">
             </el-table-column>
             <el-table-column
               prop="currentConfirmedCount"
-              label="新增"
+              label="当前新增"
               sortable
               align="center">
             </el-table-column>
             <el-table-column
               prop="deadCount"
-              label="死亡"
+              label="累计死亡"
               sortable
               align="center">
             </el-table-column>
             <el-table-column
               prop="curedCount"
-              label="治愈"
+              label="累计治愈"
               sortable
               align="center">
             </el-table-column>
             <el-table-column
               prop="suspectedCount"
-              label="疑似"
+              label="当前疑似"
               sortable
               align="center">
             </el-table-column>
@@ -132,6 +133,7 @@ export default {
           falieMessage:'条件查询数据失败！',
           successMessage1:'数据获取成功！',
           falieMessage1:'数据获取失败！',
+          title6:'',
           btnText:'查询',
           isExit:false,
           isExit1:false,
@@ -144,7 +146,7 @@ export default {
           title2:'国内省份柱状图',
           title5:'全国各省图形模式',
           title3:'查看',
-          title4:'省份图',
+          title4:'省份',
           type:'CHNPrivince',
           total:0,
           pageSize:10,
@@ -252,9 +254,17 @@ export default {
           offset:130,
            duration:1500
         });
+      },
+      setMM(){
+       let d = new Date()
+       let str=''
+        str +=d.getFullYear()+'-' //获取当前年份
+        str +='0'+(d.getMonth()+1) //获取当前月份（0——11）
+        this.title6 = `数据统计时间范围：（2020-02 至 ${str}）` 
       }
     },
     created(){
+      this.setMM()
           this.axios.get('/countries/CHN').then((res)=>{
             if(res.data && res.data.length !== 0){
                     this.open2(this.successMessage1)

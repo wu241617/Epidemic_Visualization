@@ -39,7 +39,7 @@ export default {
         window.onresize = myChart.resize;
         let option_right1 = {
           title: {
-            text: `${this.title}（最新确诊）`,
+            text: `${this.title}（累计确诊）`,
             textStyle: {
               fontSize: 13,
               color:'white'
@@ -85,6 +85,7 @@ export default {
             //坐标轴刻度设置
             },
           series: [{
+            name: '累计确诊人数',
             type: 'bar',
             data: [],
             barMaxWidth: "50%"

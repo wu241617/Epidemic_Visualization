@@ -70,7 +70,7 @@
                     </template>
                     <el-table-column
                     prop="confirmedCount"
-                    label="确诊"
+                    label="累计确诊"
                     align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium">{{ scope.row.confirmedCount }}</el-tag>
@@ -78,7 +78,7 @@
                     </el-table-column>
                     <el-table-column
                     prop="confirmedIncr"
-                    label="新增"
+                    label="当前新增"
                     align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium" type="warning">{{ scope.row.confirmedIncr }}</el-tag>
@@ -86,7 +86,7 @@
                     </el-table-column>
                     <el-table-column
                     prop="deadCount"
-                    label="死亡"
+                    label="累计死亡"
                     align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium" type="danger">{{ scope.row.deadCount }}</el-tag>
@@ -94,7 +94,7 @@
                     </el-table-column>
                     <el-table-column
                     prop="curedCount"
-                    label="治愈" 
+                    label="累计治愈" 
                     align="center">
                     <template slot-scope="scope">
                         <el-tag size="medium" type="success">{{ scope.row.curedCount }}</el-tag>
@@ -128,21 +128,29 @@ export default {
             GlobalExit:false,
             CHNPrivinceExit:false,
             closeTitle:'关闭浮层',
-            pickerOptions: {
-                disabledDate: time => {
-                return this.dealDisabledDate(time);
-                }
-            }
+            pickerOptions: {}
         }
     },
     mounted(){
         switch(this.type){
             case 'Global':
+                this.title2 = '数据支持查询范围：（2020-02 至 2021-02）'
+                this.pickerOptions = {
+                    disabledDate: time => {
+                        return this.dealDisabledDate(time);
+                    }
+                }
                 this.request('/countries/daily/country',{'countryName':this.rowData.countryName})
                 this.titleText = this.rowData.countryName,
                 this.GlobalExit = true
                 break;
             case 'CHNPrivince':
+                this.title2 = '数据支持查询范围：（2020-02起）'
+                this.pickerOptions = {
+                    disabledDate: time => {
+                        return this.dealDisabledDate1(time);
+                    }
+                }
                 this.request('/provinces/CHN/daily/province',{'provinceName':this.rowData.provinceName})
                 this.titleText = this.rowData.provinceName
                 this.CHNPrivinceExit = true
@@ -156,6 +164,14 @@ export default {
             return (
                 time.getTime() < new Date(selectStartDate).getTime() ||
                 time.getTime() > new Date(selectEndDate).getTime()
+            );
+        },
+         dealDisabledDate1(time) {
+            let selectStartDate = 'Sat Feb 01 2020 00:00:00 GMT+0800 (中国标准时间)'
+            //let selectEndDate = 'Mon Feb 22 2021 00:00:00 GMT+0800 (中国标准时间)' 
+            return (
+                time.getTime() < new Date(selectStartDate).getTime() ||
+                time.getTime() > new Date().getTime()
             );
         },
         request(url,obj){
@@ -238,7 +254,7 @@ export default {
                             dateId: this.data[i].dateId,
                             countryCode: this.data[i].countryCode,
                             confirmedCount: this.data[i].confirmedCount,
-                            confirmedIncr: this.data[i].confirmedIncr,
+                            confirmedIncr: this.data[i].currentConfirmedCount,
                             deadCount: this.data[i].deadCount,
                             curedCount: this.data[i].curedCount
                         }
@@ -252,7 +268,7 @@ export default {
                             dateId:this.data[i].dateId,
                             provinceCode:this.data[i].provinceCode,
                             confirmedCount:this.data[i].confirmedCount,
-                            confirmedIncr:this.data[i].confirmedIncr,
+                            confirmedIncr:this.data[i].currentConfirmedCount,
                             deadCount:this.data[i].deadCount,
                             curedCount:this.data[i].curedCount
                         }

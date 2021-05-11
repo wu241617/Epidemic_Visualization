@@ -4,7 +4,7 @@
         <el-row>
             <span class="titleStyle">{{title}}</span>
              <el-button-group>
-                <el-button type="success" @click="getGuoNei" size="small" :disabled="isDisabled0">{{GlobalType[0]}}</el-button>
+                <el-button type="primary" @click="getGuoNei" size="small" :disabled="isDisabled0">{{GlobalType[0]}}</el-button>
                 <el-button type="warning" @click="getGuoJi" size="small" :disabled="isDisabled1">{{GlobalType[1]}}</el-button>
                 <el-button type="danger" @click="getQuanQiu" size="small" :disabled="isDisabled2">{{GlobalType[2]}}</el-button>
              </el-button-group>

@@ -12,7 +12,7 @@
               clearable
               @keydown.enter.native="serach">
             </el-input>
-            <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
+            <el-button type="primary" @click="serach" icon="el-icon-search" size="small">{{btnText}}</el-button>
             <el-tag type="warning" style="float:right;">{{title1}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title2}}</el-button></el-tag>
             <div style="float:right;display:flex;margin-right:50px;">
               <el-select v-model="value" filterable placeholder="请选择省份" size="small" style="width:100px;">
@@ -96,6 +96,7 @@
           </el-table>
 
            <el-pagination
+           class="pagination"
           small
           background
           @size-change="handleSizeChange"
@@ -449,8 +450,8 @@ export default {
   }
   .el-pagination{
     margin-top:20px;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
   }
   .float{
    width:100%;
@@ -461,4 +462,14 @@ export default {
    left:0;
    z-index:99;
  }
+ .pagination{
+        text-align: right;
+    }
+    /deep/ .pagination .el-pagination__sizes {
+		float: left;
+	}
+
+	/deep/ .pagination .el-pagination__total {
+		float: left;
+	}
 </style>>

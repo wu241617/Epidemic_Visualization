@@ -12,7 +12,7 @@
               clearable
               @keydown.enter.native="serach">
             </el-input>
-            <el-button type="primary" @click="serach" icon="el-icon-search">{{btnText}}</el-button>
+            <el-button type="primary" @click="serach" icon="el-icon-search" size="small">{{btnText}}</el-button>
             <!-- <el-tag type="warning" style="float:right;margin-left:50px;">{{title2}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView">{{title3}}</el-button></el-tag> -->
             <el-tag type="success" style="float:right;">{{title5}}<el-button type="text" style="float:right;margin:0;" size="small" icon="el-icon-view" class="window" @click="exitView1">{{title3}}</el-button></el-tag>
           </el-row>
@@ -93,6 +93,7 @@
           </el-table>
           
            <el-pagination
+           class="pagination"
           small
           background
           @size-change="handleSizeChange"
@@ -364,7 +365,17 @@ export default {
   }
    .el-pagination{
     margin-top:20px;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
   }
+  .pagination{
+        text-align: right;
+    }
+    /deep/ .pagination .el-pagination__sizes {
+		float: left;
+	}
+
+	/deep/ .pagination .el-pagination__total {
+		float: left;
+	}
 </style>>

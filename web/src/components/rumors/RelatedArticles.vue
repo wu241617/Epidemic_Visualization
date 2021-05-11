@@ -30,6 +30,9 @@
                   label="主要总结"
                   sortable
                   >
+                   <template slot-scope="scope">
+                    <span :title="scope.row.mainSummary">{{scope.row.mainSummary}}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
                   prop="body"
@@ -235,4 +238,7 @@ color:red;
     display: flex;
     justify-content: center;
   }
+  /deep/ .el-table .cell{
+     white-space: nowrap;
+ } 
 </style>
